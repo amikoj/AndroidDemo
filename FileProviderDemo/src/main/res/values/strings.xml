@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FileProvider</string>
+    <string name="open_image_from_file">OpenByFile</string>
+    <string name="open_image_parse_string">OpenByString</string>
+    <string name="open_image_fileprovider">OpenByFileProvider</string>
+    <string name="copy_file_string">CopyFile</string>
+    <string name="take_photo">TakePhoto</string>
+    <string name="take_photo_new">TakePhotoNew</string>
+</resources>

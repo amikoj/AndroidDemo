@@ -1,2 +1,2 @@
-include ':ActionBarDemo'
+include ':ActionBarDemo',':FileProviderDemo'
 
