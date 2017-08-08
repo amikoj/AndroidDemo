@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!--all of theme-->
+
+
+
+    <!--basic theme -->
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowActionBar">true</item>
+        <!--require api over 21. -->
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <!--actionbar style. -->
+        <item name="android:actionBarStyle">@style/customerActionStyle</item>
+        <item name="android:actionBarTabStyle">@style/customerActionTabStyle</item>
+    </style>
+
+
+
+
+    <!--自定义toolbar-->
+    <style name="customerToolbarStyle" parent="Widget.AppCompat.Toolbar">
+
+
+
+    </style>
+
+
+    <!--actionbar 自定义style -->
+    <style name="customerActionStyle" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:displayOptions">showCustom</item>
+        <item name="android:divider">?attr/dividerVertical</item>
+
+        <item name="android:customNavigationLayout">@layout/test</item>
+        <item name="android:titleTextStyle">@style/customerActionBarTitleTextStyle</item>
+        <item name="android:subtitleTextStyle">?attr/titleTextStyle</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <!--tab背景色 -->
+        <item name="android:backgroundStacked">@color/colorPrimary</item>
+        <item name="android:backgroundSplit">@color/colorPrimary</item>
+        <item name="android:actionButtonStyle">@style/customerActionBarButtonStyle</item>
+        <item name="android:actionOverflowButtonStyle">@style/customerActionBarButtonStyle</item>
+    </style>
+
+
+
+
+
+
+
+    <style name="customerActionBarTitleTextStyle">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">#aaaaaa</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <!--导航栏自定义style -->
+    <style name="customerActionTabStyle">
+
+    </style>
+
+
+    <!--actionbar button 自定义style. -->
+    <style name="customerActionBarButtonStyle">
+        <item name="android:background">#ff0000</item>
+        <item name="android:minWidth">@dimen/abc_action_button_min_width_material</item>
+        <item name="android:minHeight">@dimen/abc_action_button_min_height_material</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">2</item>
+        <item name="textAllCaps">@bool/abc_config_actionMenuItemAllCaps</item>
+    </style>
+
+
+
+
+
+
+
+</resources>
