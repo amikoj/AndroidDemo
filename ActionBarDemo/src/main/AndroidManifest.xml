@@ -12,12 +12,21 @@
 
 
 
-        <activity android:name="cn.enjoytoday.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <!--Theme activity use -->
+        <activity android:name=".ThemeActivity" android:theme="@style/AppTheme.Theme1"/>
+
+
+
+
+
     </application>
 
 </manifest>

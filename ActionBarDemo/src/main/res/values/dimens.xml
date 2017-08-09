@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--theme about.-->
+    <dimen name="actionBarTitleTextSize">18sp</dimen>
+    <dimen name="actionBarSubTitleTextSize">14sp</dimen>
+
+
+
+
+
+
+
+
+
+
+
+</resources>

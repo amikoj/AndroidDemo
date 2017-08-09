@@ -4,10 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_height="match_parent">
 
-    <TextView
-        style="@style/CustomerTextStyle" />
+    <!--<TextView-->
+        <!--style="@style/CustomerTextStyle" />-->
+
+    <Button
+        android:id="@+id/theme1"
+        android:text="theme1"
+        style="@style/buttonStyle" />
+    <Button
+        android:id="@+id/theme2"
+        android:text="theme2"
+        style="@style/buttonStyle" />
+    <Button
+        android:id="@+id/theme3"
+        android:text="theme3"
+        style="@style/buttonStyle" />
+    <Button
+        android:id="@+id/theme4"
+        android:text="theme4"
+        style="@style/buttonStyle" />
+
 
 
 

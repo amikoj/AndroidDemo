@@ -12,8 +12,20 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:text">Customer Text</item>
-        <item name="android:textColor">@android:color/holo_blue_bright</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+
+    <!--basic button style-->
+    <style name="buttonStyle">
+        <item name="android:layout_width">240dip</item>
+        <item name="android:background">@drawable/button_style</item>
+        <item name="android:layout_height">40dip</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:onClick">onClick</item>
+        <item name="android:layout_margin">5dip</item>
     </style>
 
 

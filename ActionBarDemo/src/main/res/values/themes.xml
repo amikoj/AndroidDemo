@@ -4,41 +4,115 @@
 
 
 
-    <!--basic theme -->
-    <style name="AppTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+
+    <!--actionbar  -->
+    <style name="AppTheme.ActionBar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:displayOptions">showTitle|homeAsUp</item>
+        <item name="android:divider">?attr/dividerVertical</item>
+        <item name="android:height">50dip</item>
+        <item name="android:paddingStart">0dip</item>
+        <item name="android:paddingTop">0dip</item>
+        <item name="android:paddingEnd">0dip</item>
+        <item name="android:paddingBottom">0dip</item>
+        <item name="android:titleTextStyle">@style/AppTheme.ActionBar.Title</item>
+        <item name="android:subtitleTextStyle">@style/AppTheme.ActionBar.Subtitle</item>
+        <item name="android:progressBarStyle">@android:style/Widget.ProgressBar.Horizontal</item>
+        <item name="android:indeterminateProgressStyle">@android:style/Widget.ProgressBar.Small</item>
+        <!--左侧图标设置 -->
+        <item name="android:homeLayout">@layout/action_bar_home</item>
+    </style>
+
+
+
+    <!--actionbar title -->
+    <style name="AppTheme.ActionBar.Title">
+        <item name="android:textSize">@dimen/actionBarTitleTextSize</item>
+        <item name="android:textColor">@color/actionBarTitleTextColor</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+
+
+
+    <!--actionbar subtitle text -->
+    <style name="AppTheme.ActionBar.Subtitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <!--actionBarTab -->
+    <style name="AppTheme.ActionBarTab">
+
+    </style>
+
+
+    <!--actionbar overflow. -->
+    <style name="AppTheme.OverFlow">
+
+
+    </style>
+
+
+
+
+    <!--basic theme of application -->
+    <style name="AppTheme">
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:windowActionBar">true</item>
         <!--require api over 21. -->
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <!--actionbar style. -->
-        <item name="android:actionBarStyle">@style/customerActionStyle</item>
-        <item name="android:actionBarTabStyle">@style/customerActionTabStyle</item>
+        <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
+        <item name="android:actionBarTabStyle">@style/AppTheme.ActionBarTab</item>
+        <!--透明状态栏 -->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <item name="android:actionOverflowButtonStyle">@style/AppTheme.OverFlow</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+
+    </style>
+
+
+
+
+
+    <!--theme1 -->
+    <style name="AppTheme.Theme1" parent="AppTheme">
+        <item name="actionBarStyle">@style/AppTheme.ActionBar.Theme1.ActionBar</item>
+
     </style>
 
 
 
 
-    <!--自定义toolbar-->
-    <style name="customerToolbarStyle" parent="Widget.AppCompat.Toolbar">
 
+     <!--theme2 -->
+     <style name="AppTheme.Theme2" parent="AppTheme">
+
+
+     </style>
+
+
+    <!--theme3 -->
+    <style name="AppTheme.Theme3" parent="AppTheme">
 
 
     </style>
+
+    <!--theme4 -->
+    <style name="AppTheme.Theme4" parent="AppTheme">
+
+
+    </style>
+
+
 
 
     <!--actionbar 自定义style -->
-    <style name="customerActionStyle" parent="@android:style/Widget.Holo.ActionBar">
+    <style name="AppTheme.ActionBar.Theme1.ActionBar" parent="@style/AppTheme.ActionBar">
         <item name="android:displayOptions">showCustom</item>
         <item name="android:divider">?attr/dividerVertical</item>
-
-        <item name="android:customNavigationLayout">@layout/test</item>
-        <item name="android:titleTextStyle">@style/customerActionBarTitleTextStyle</item>
-        <item name="android:subtitleTextStyle">?attr/titleTextStyle</item>
-        <item name="android:background">@color/colorPrimary</item>
-        <!--tab背景色 -->
-        <item name="android:backgroundStacked">@color/colorPrimary</item>
-        <item name="android:backgroundSplit">@color/colorPrimary</item>
-        <item name="android:actionButtonStyle">@style/customerActionBarButtonStyle</item>
-        <item name="android:actionOverflowButtonStyle">@style/customerActionBarButtonStyle</item>
+        <item name="android:customNavigationLayout">@layout/customer_action_bar</item>
     </style>
 
 
@@ -46,7 +120,7 @@
 
 
 
-
+    <!--actionbar title style. -->
     <style name="customerActionBarTitleTextStyle">
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">#aaaaaa</item>
@@ -70,6 +144,10 @@
         <item name="android:maxLines">2</item>
         <item name="textAllCaps">@bool/abc_config_actionMenuItemAllCaps</item>
     </style>
+
+
+
+
 
 
 
