@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:tag=""
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <Button
+        android:id="@+id/register"
+        android:text="register"
+        style="@style/buttonStyle" />
+
+    <Button
+        android:id="@+id/sing_in"
+        android:text="Sign In"
+        style="@style/buttonStyle" />
+    <Button
+        android:id="@+id/sign_out"
+        android:text="Sign out"
+        style="@style/buttonStyle" />
+    <Button
+        android:id="@+id/upload"
+        android:text="Upload"
+        style="@style/buttonStyle" />
+
+
+
+
+</LinearLayout>

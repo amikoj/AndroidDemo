@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="40dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/filename"
+        android:hint="://image"
+        style="@style/editTextStyle" />
+
+    <Button
+        android:text="file"
+        android:layout_marginLeft="8dip"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:onClick="onClick"
+        android:padding="5dip"
+        android:id="@+id/file_select"
+        android:background="@drawable/button_style"
+        android:layout_width="60dip"
+        android:gravity="center"
+        android:layout_height="40dip" />
+    </LinearLayout>
+
+
+
+    <Button
+        android:text="UPLOAD"
+        android:id="@+id/upload_file"
+        style="@style/buttonStyle" />
+
+
+
+
+
+
+</LinearLayout>

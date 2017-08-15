@@ -58,6 +58,10 @@
 
     <!--basic theme of application -->
     <style name="AppTheme">
+
+
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowActionBar">true</item>
         <!--require api over 21. -->
@@ -66,7 +70,7 @@
         <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
         <item name="android:actionBarTabStyle">@style/AppTheme.ActionBarTab</item>
         <!--透明状态栏 -->
-        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:actionOverflowButtonStyle">@style/AppTheme.OverFlow</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
 

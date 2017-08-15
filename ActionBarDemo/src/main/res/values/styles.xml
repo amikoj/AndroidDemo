@@ -26,10 +26,24 @@
         <item name="android:textSize">18sp</item>
         <item name="android:onClick">onClick</item>
         <item name="android:layout_margin">5dip</item>
+        <item name="android:gravity">center</item>
     </style>
 
 
+<style name="editTextStyle">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">@color/colorPrimary</item>
+    <item name="android:background">#aaaaaa</item>
+    <item name="android:layout_width">250dip</item>
+    <item name="android:layout_height">40dip</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:cursorVisible">true</item>
+    <item name="android:focusable">true</item>
+    <item name="android:textCursorDrawable">@color/colorPrimary</item>
+    <item name="android:ellipsize">end</item>
+    <item name="android:lines">1</item>
 
+</style>
 
 
 
