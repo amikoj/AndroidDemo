@@ -1,2 +1,2 @@
-include ':ActionBarDemo',':FileProviderDemo'
+include ':ActionBarDemo', ':FileProviderDemo', ':stackoverflowflidder'
 

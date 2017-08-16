@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="com.enjoytoday.stackoverflow.SplashActivity">
+
+
+
+    <TextView
+        android:id="@+id/hello"
+        android:text="Hello StackOverFlow"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/constraintlayout"
+        app:layout_constraintBottom_toBottomOf="@id/constraintlayout"
+        app:layout_constraintTop_toTopOf="@+id/constraintlayout"
+        app:layout_constraintStart_toStartOf="@id/constraintlayout"
+        style="@style/textStyle"/>
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
