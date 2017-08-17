@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">StackOverFlowViewer</string>
+
+    <string name="actionbar_title">View</string>
 </resources>

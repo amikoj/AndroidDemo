@@ -5,15 +5,14 @@
     android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context="com.enjoytoday.stackoverflow.SplashActivity">
+    tools:context="com.enjoytoday.stackoverflow.interaction.SplashActivity">
 
 
 
     <TextView
         android:id="@+id/hello"
         android:text="Hello StackOverFlow"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@id/constraintlayout"
         app:layout_constraintBottom_toBottomOf="@id/constraintlayout"
