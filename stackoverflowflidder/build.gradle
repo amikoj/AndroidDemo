@@ -30,4 +30,7 @@ dependencies {
     // logo,在线icon.
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.koushikdutta.ion:ion:2.+'
+
+    // jsoup HTML parser library @ https://jsoup.org/ html解析
+    compile 'org.jsoup:jsoup:1.10.3'
 }
