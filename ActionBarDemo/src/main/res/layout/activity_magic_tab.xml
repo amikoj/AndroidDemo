@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="100dip"
+    tools:context="cn.enjoytoday.MagicTabActivity"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/pre"
+            android:padding="2dip"
+            android:src="@drawable/ic_before"
+            android:scaleType="fitCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/next"
+            android:padding="2dip"
+            android:src="@drawable/ic_next"
+            android:scaleType="fitCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+
+    <com.gigamole.navigationtabstrip.NavigationTabStrip
+        android:id="@+id/nts"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        app:nts_color="#0000ff"
+        app:nts_size="15sp"
+        app:nts_weight="3dp"
+        app:nts_factor="2.5"
+        app:nts_titles="@array/titles"
+        app:nts_type="line"
+        app:nts_gravity="bottom"
+        app:nts_corners_radius="1.5dp"
+        app:nts_animation_duration="300"
+        app:nts_active_color="#00ff00"
+        app:nts_inactive_color="#c4c4c4" />
+
+    </LinearLayout>
+
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/graphic_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

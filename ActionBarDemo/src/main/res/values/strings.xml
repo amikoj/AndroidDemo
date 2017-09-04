@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ActionBarDemo</string>
+
+    <string-array name="titles">
+        <item>Nav</item>
+        <item>Tab</item>
+        <item>Strip</item>
+    </string-array>
 </resources>

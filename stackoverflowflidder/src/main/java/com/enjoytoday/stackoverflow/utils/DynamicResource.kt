@@ -17,6 +17,7 @@ package com.enjoytoday.stackoverflow.utils
 
          companion object {
              var MAIN_TONES:Int= android.graphics.Color.BLUE
+
          }
 
     }

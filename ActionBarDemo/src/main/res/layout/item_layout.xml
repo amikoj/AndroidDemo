@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#dddddd"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+    android:id="@+id/text"
+    android:textSize="18sp"
+    android:gravity="center"
+    android:textColor="@android:color/holo_blue_bright"
+    android:text="test"
+    android:layout_width="match_parent"
+    android:layout_height="60dp" />
+
+
+    <cn.enjoytoday.views.PieChart
+        android:id="@+id/pie_chart"
+        android:layout_width="300dip"
+        android:layout_height="300dip" />
+
+</LinearLayout>
