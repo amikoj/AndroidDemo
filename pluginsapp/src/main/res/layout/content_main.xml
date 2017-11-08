@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cn.enjoytoday.pluginsapp.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_horizontal_ntb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000">
+
+            <FrameLayout
+                android:id="@+id/wrapper_ntb_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <devlight.io.library.ntb.NavigationTabBar
+                    android:id="@+id/ntb_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:ntb_bg_color="@color/colorPrimary"
+                    app:ntb_title_size="12sp"
+                    app:ntb_badge_bg_color="@color/colorAccent"
+                    app:ntb_badge_gravity="bottom"
+                    app:ntb_badge_position="left"
+                    app:ntb_badge_title_color="@android:color/white"
+                    app:ntb_badge_use_typeface="true"
+                    app:ntb_badged="true"
+                    app:ntb_title_mode="active"
+                    app:ntb_titled="true"
+                    app:ntb_scaled="false"
+                    app:ntb_typeface="fonts/agency.ttf"/>
+
+            </FrameLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <View
+            android:id="@+id/mask"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="bottom"/>
+
+</android.support.constraint.ConstraintLayout>

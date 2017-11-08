@@ -28,7 +28,29 @@
         style="@style/buttonStyle" />
 
 
+    <FrameLayout
+        android:id="@+id/roate_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_gravity="end"
+        android:layout_marginBottom="50dip"
+        android:id="@+id/image_icon"
+        android:src="@drawable/qr"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
 
+        <ImageView
+            android:layout_gravity="end"
+            android:layout_marginBottom="50dip"
+            android:id="@+id/image_back_icon"
+            android:src="@drawable/qr"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+
+    </FrameLayout>
 
 </LinearLayout>

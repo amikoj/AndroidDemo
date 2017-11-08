@@ -44,7 +44,7 @@ class MagicTabActivity : Activity() {
                 val view: View = layoutInflater.inflate(R.layout.item_layout, null)
                 view.text.text = "this is pager $position"
 
-                view.pie_chart.setList(mutableListOf(PartModel(Color.GREEN,120f),PartModel(Color.RED,140f),PartModel(Color.BLUE,120f)))
+                view.pie_chart.setList(mutableListOf(PartModel(120f),PartModel(140f),PartModel(120f)))
 
 
                 container?.addView(view)

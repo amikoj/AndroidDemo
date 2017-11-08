@@ -62,6 +62,7 @@
 
         <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowActionBar">true</item>
         <!--require api over 21. -->

@@ -10,8 +10,20 @@ import android.os.Message
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
+import android.view.VelocityTracker
 import android.view.View
+import android.view.ViewConfiguration
 import kotlin.coroutines.experimental.EmptyCoroutineContext.plus
+
+/**
+ * @date 17-9-4.
+ * @className PieChart
+ * @serial 1.0.0
+ *
+ *
+ *自定义扇形图表
+ */
+
 
 /**
  * @date 17-9-4.
@@ -73,6 +85,9 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
     var rectF:RectF= RectF()
 
     val REFRESH_UI=1001
+
+
+//    var  velocityTracker:VelocityTracker?=null
 
     val postHandler=object : Handler() {
         override fun handleMessage(msg: Message?) {
@@ -173,8 +188,22 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
     fun setList(list:MutableList<PartModel>){
         listBar=list
         max=0f
-        listBar.forEach {
-            max+=it.value
+        listBar.forEachIndexed { index, partModel ->
+
+            if (partModel.color==-1) {
+                when (index % 7) {
+                    0 -> partModel.color = Color.RED
+                    1 -> partModel.color = Color.parseColor("#ff6100") //橙色
+                    2 -> partModel.color = Color.YELLOW
+                    3 -> partModel.color = Color.GREEN
+                    4 -> partModel.color = Color.parseColor("#00ffff")//青色
+                    5 -> partModel.color = Color.BLUE
+                    6 -> partModel.color = Color.parseColor("#ff00ff")
+                }
+            }
+
+
+            max+=partModel.value
         }
         calcuateCooridnate(false,null,currentBarIndex)
 
@@ -194,15 +223,13 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
         paint.isAntiAlias=true
         paint.style=Paint.Style.STROKE
         paint.strokeWidth=outer_ring_radius/3f
-        Log.e("onDraw","get width:$width,height:$height,outer_ring-radius:$outer_ring_radius,inner_ring_radius:$inter_ring_radius")
 
         listBar.forEachIndexed { index, partModel ->
-
-            Log.e("onDraw","get onDraw index:$index,and startAngle:${partModel.startAngle},and sweep:${partModel.sweep},color:${partModel.color}," +
-                    "and value:${partModel.value}")
             paint.color=partModel.color
 
-            if (90f in (partModel.startAngle)..(partModel.startAngle+partModel.startAngle)){
+            val startAngle=partModel.startAngle
+            val endAngle=(partModel.startAngle+partModel.sweep)%360f
+            if ((startAngle>endAngle && endAngle>90f) || (90f in startAngle..endAngle)){
                 /**
                  * 被选中
                  */
@@ -211,9 +238,14 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
                 val offset_center_y=center_y+offerset_radius*Math.sin(Math.toRadians(offerset_angle.toDouble())).toFloat()
                 rectF.set(offset_center_x-inter_ring_radius,offset_center_y-inter_ring_radius,
                         offset_center_x+inter_ring_radius,offset_center_y+inter_ring_radius)
-//                canvas.drawArc(rectF, partModel.startAngle,partModel.sweep,false,paint)
                 currentBarIndex=index
-                onSelectedListener?.onSelectedListener(index,partModel)
+
+                if (getStartAngleByCurrentIndex(index)==startAngle) {
+                    /**
+                     * 完全重合
+                     */
+                    onSelectedListener?.onSelectedListener(index, partModel)
+                }
 
             }else{
                 /**
@@ -238,11 +270,54 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
      */
     fun setCurrentBarIndex(currentIndex: Int?){
         currentIndex?:return
-        if (this.currentBarIndex!=currentIndex){
-            this.currentBarIndex= currentIndex
-            calcuateCooridnate(false,null,currentIndex)
+
+        val startAngle=listBar[currentIndex].startAngle
+        val endAngle= getStartAngleByCurrentIndex(currentIndex)
+
+//        log(message = "setCurrentBarIndex,and startAngle is:$startAngle,endAngle:$endAngle")
+        var offset=endAngle-startAngle
+
+
+        if (Math.abs(offset)>180){
+            offset=(offset+360f)%360
         }
+        val times=Math.abs(offset/20f).toInt()
+        if (times<=1){
+            calcuateCooridnate(true,offset,currentIndex)
+        }else {
+            val unit=offset/times
+            handler.postDelayed(object:Runnable{
+                var n=0
+                override fun run() {
+                    if (n<times) {
+                        calcuateCooridnate(true, unit, currentIndex)
+                        n++
+                        handler.postDelayed(this,100)
+                    }else{
+                        calcuateCooridnate(true, offset-unit*n, currentIndex)
+                    }
+                }
+
+
+            }, 100)
+
+        }
+
     }
+
+
+    /**
+     * 获取当前选中index的开始角度
+     */
+    fun getStartAngleByCurrentIndex(currentIndex: Int):Float{
+
+        val bar=listBar[currentIndex]
+        return (90f-bar.sweep/2f+360)%360
+
+    }
+
+
+
 
 
     /**
@@ -257,7 +332,7 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
         if (cooridnate_x<center_x){
             angle=180-angle
         }
-        return (360+angle.toFloat())%360f
+        return (360-angle.toFloat())%360f
     }
 
 
@@ -268,34 +343,26 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
      * 计算角度坐标
      */
     fun calcuateCooridnate(isMove:Boolean,moved:Float?,currentIndex:Int?){
-
-        if (isMove) {
+//        log(message = "calcuateCooridnate")
+        if (isMove ) {
             /**
              * 滑动时移动处理,手指未离开屏幕
              */
 
-            listBar.forEachIndexed { index, partModel ->
-                val angle=(partModel.startAngle+moved!!)%360f
-                partModel.startAngle=angle
+            if (moved!=null && moved!=0f) {
+                listBar.forEachIndexed { index, partModel ->
+                    val angle=(partModel.startAngle+moved+360)%360f
+                    partModel.startAngle=angle
+                }
+
+                postHandler.sendEmptyMessage(REFRESH_UI)
             }
-
-            invalidate()
-
         }else{
-
             /**
              * 开始或者滑动结束时
              */
-
-
-
-            val newlist=listBar.subList(currentBarIndex,listBar.size)
-            if (currentIndex!!>0) {
-                newlist.addAll(listBar.subList(0, currentBarIndex + 1))
-            }
             var totalAngle=0f
-
-            newlist.forEachIndexed { index, partModel ->
+            listBar.forEachIndexed { index, partModel ->
                 var sweep=partModel.value/max*360f
                 if (totalAngle+sweep>360){
                     sweep=360-totalAngle
@@ -310,17 +377,15 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
                     /**
                      *
                      */
-                    partModel.startAngle=((newlist[0].startAngle+totalAngle)+360)%360f
+                    partModel.startAngle=((listBar[0].startAngle+totalAngle)+360)%360f
                 }
                 totalAngle+=partModel.sweep
 
             }
 
-//            listBar=newlist.subList(listBar.size-currentBarIndex,listBar.size)
-//            listBar.addAll(newlist.subList(0,listBar.size-currentBarIndex))
+            invalidate()
 
 
-            postHandler.sendEmptyMessage(REFRESH_UI)
 
         }
 
@@ -334,51 +399,62 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
 
 
 
-
-
+//
+//    var mMaxVelocityTracker:Int=0
+//
+//    var mPointerId:Int?=null
 
     var pre_x:Float?=null
     var pre_y:Float?=null
 
 
+
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        Log.e("onDraw","onTouchEvent ,and action is:${event!!.action}")
         val x=event!!.x
         val y=event.y
 
+
+//        log(message = "onTouchEvent ,and action is:${event!!.action},and event_x:$x,and event_y:$y")
         if (pre_x==null){
             pre_x=x
         }
         if (pre_y==null){
-            pre_y=x
+            pre_y=y
         }
         when(event.action){
 
             MotionEvent.ACTION_MOVE  ->{
-                if (pre_x!=null && pre_y!=null && pre_x!=x && pre_y!=y){
-                   val sweep= getAngelByCooridnate(x,y)-getAngelByCooridnate(pre_x!!,pre_y!!)
-                    calcuateCooridnate(true,sweep,currentBarIndex)
-                    pre_x=x
-                    pre_y=y
+
+
+                val offset_x=Math.abs(pre_x!!-x)
+                val offset_y=Math.abs(pre_y!!-y)
+//                log(message = "actionMove offset_x:$offset_x,and offset_y:$offset_y")
+                if (pre_x != null && pre_y != null && (offset_x>=10f || offset_y>=10f) ) {
+                    val sweep = getAngelByCooridnate(x, y) - getAngelByCooridnate(pre_x!!, pre_y!!)
+                    calcuateCooridnate(true, sweep, currentBarIndex)
+                    pre_x = x
+                    pre_y = y
                 }
             }
             MotionEvent.ACTION_UP ->{
-                if (pre_x!=null && pre_y!=null && pre_x!=x && pre_y!=y){
-                    val sweep= getAngelByCooridnate(x,y)-getAngelByCooridnate(pre_x!!,pre_y!!)
-                    calcuateCooridnate(true,sweep,currentBarIndex)
-                    calcuateCooridnate(false,null,currentBarIndex)
-                    pre_x=null
-                    pre_y=null
+                if (pre_x!=null && pre_y!=null){
+                    val sweep = getAngelByCooridnate(x, y) - getAngelByCooridnate(pre_x!!, pre_y!!)
+                    calcuateCooridnate(true, sweep, currentBarIndex)
+                    setCurrentBarIndex(currentBarIndex)
                 }
+                pre_x=null
+                pre_y=null
 
+//                releaseVelocityTracker()
 
             }
 
 
             MotionEvent.ACTION_DOWN ->{
 
-
             }
+
 
         }
 
@@ -387,6 +463,20 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
     }
 
 
+//
+//    fun releaseVelocityTracker(){
+//        if(null!=velocityTracker){
+//            velocityTracker!!.clear()
+//            velocityTracker!!.recycle()
+//            velocityTracker=null
+//        }
+//    }
+
+
+    override fun onDetachedFromWindow() {
+//        releaseVelocityTracker()
+        super.onDetachedFromWindow()
+    }
 
 
 
@@ -394,13 +484,43 @@ class PieChart(context: Context,attributeset: AttributeSet?,defStyleAttr:Int):Vi
 }
 
 
-class PartModel(var color:Int,var value:Float){
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class PartModel(var value:Float){
+    var tagId:String?=null
+    var color:Int=-1
     var startAngle:Float=0f
     var sweep:Float=0f
 
 
 }
+
+
+
+interface OnSelectedListener{
+
+    /**
+     * 被选中的model内容
+     */
+    fun onSelectedListener(index:Int,partModel: PartModel)
+}
+
+
 
 /**
  * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
@@ -416,13 +536,4 @@ fun View.dip2px(context: Context, dpValue: Float): Float {
 fun View.px2dip(context: Context, pxValue: Float): Float {
     val scale = context.resources.displayMetrics.density
     return pxValue / scale + 0.5f
-}
-
-
-interface OnSelectedListener{
-
-    /**
-     * 被选中的model内容
-     */
-    fun onSelectedListener(index:Int,partModel: PartModel)
 }

@@ -1,2 +1,1 @@
-include ':ActionBarDemo', ':FileProviderDemo', ':stackoverflowflidder'
-
+include ':ActionBarDemo', ':FileProviderDemo', ':pluginsapp', ':pluginchild', ':lib', ':DynamicLib'

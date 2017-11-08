@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.enjoytoday.pluginchild.MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/du_video"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:onClick="onClick"
+
+            android:layout_height="wrap_content"
+            android:text="DuVideo" />
+
+
+        <TextView
+            android:id="@+id/du_swipe"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="DuSwipe" />
+
+
+        <TextView
+            android:id="@+id/du_trigger"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="DuTrigger" />
+
+
+        <TextView
+            android:id="@+id/du_caller"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="DuCaller" />
+
+
+
+        <TextView
+            android:id="@+id/du_weather"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="DuWeather" />
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
