@@ -15,7 +15,12 @@ class TabViewRule {
 
 
 
-    fun addRule(){
+
+
+    /**
+     * 添加规则
+     */
+    fun addRule(viewType:TabViewType,viewAdapter: TabViewAdapter){
 
 
 

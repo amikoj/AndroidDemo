@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         override fun handleMessage(msg: Message?) {
 
+
             when(msg!!.what){
                 GRANT_EXTERNAL_STORAGE ->{
                     /**
@@ -284,9 +285,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         ntb_horizontal.setViewPager(vp_horizontal_ntb, 2)
 
         ntb_horizontal.post {
-            val viewPager = findViewById(R.id.vp_horizontal_ntb)
-            (viewPager.layoutParams as ViewGroup.MarginLayoutParams).topMargin = (-ntb_horizontal.badgeMargin).toInt()
-            viewPager.requestLayout()
+            (vp_horizontal_ntb.layoutParams as ViewGroup.MarginLayoutParams).topMargin = (-ntb_horizontal.badgeMargin).toInt()
+            vp_horizontal_ntb.requestLayout()
         }
 
         ntb_horizontal.onTabBarSelectedIndexListener = object : NavigationTabBar.OnTabBarSelectedIndexListener {

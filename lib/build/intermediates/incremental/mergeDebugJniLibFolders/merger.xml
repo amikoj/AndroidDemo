@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/caihaifei/Projects/oop/AndroidDemo/lib/libs"><file name="android-support-v4.jar" path="/home/caihaifei/Projects/oop/AndroidDemo/lib/libs/android-support-v4.jar"/></source></dataSet><dataSet config="debug"><source path="/home/caihaifei/Projects/oop/AndroidDemo/lib/src/debug/jniLibs"/></dataSet></merger>

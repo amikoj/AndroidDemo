@@ -1,1 +1,1 @@
-include ':ActionBarDemo', ':FileProviderDemo', ':pluginsapp', ':pluginchild', ':lib', ':DynamicLib'
+include ':ActionBarDemo', ':FileProviderDemo', ':pluginsapp'/**, ':pluginchild'**/, ':lib', ':DynamicLib', ':rimedoj'
