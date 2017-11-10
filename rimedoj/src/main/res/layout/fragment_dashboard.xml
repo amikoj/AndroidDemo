@@ -26,6 +26,9 @@
                 android:clipChildren="false"
                 tools:listitem="@layout/item_collection_list"/>
         <TextView
+            android:layout_marginTop="@dimen/recycle_item_start_end_padding"
+            android:paddingStart="@dimen/recycle_item_start_end_padding"
+            android:paddingEnd="@dimen/recycle_item_start_end_padding"
             android:id="@+id/no_collections"
             android:layout_width="match_parent"
             android:layout_height="@dimen/collection_item_height"
