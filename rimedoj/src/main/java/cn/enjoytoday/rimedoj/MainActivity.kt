@@ -2,6 +2,7 @@ package cn.enjoytoday.rimedoj
 
 import android.net.Uri
 import android.os.Bundle
+import android.support.annotation.IntDef
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -14,8 +15,23 @@ import cn.enjoytoday.rimedoj.fragments.*
 import cn.enjoytoday.rimedoj.helper.BottomNavigationViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
+
+
+
+    companion object {
+
+        @IntDef(SHOW, UNSHORN)
+        @Retention(AnnotationRetention.SOURCE)
+        annotation class Visibility
+
+        const val SHOW = 0L
+        const val UNSHORN = 1L
+
+    }
+
 
 
     /**
@@ -27,33 +43,63 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        log(msg = "mOnNavigationItemSelectedListener and item info:${item.title}")
         when (item.itemId) {
             R.id.navigation_home -> {
-                toolbar.visibility=View.GONE
-                viewpager.currentItem = 0
+                onFragmentIndexChanged(0)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                toolbar.visibility=View.VISIBLE
-                toolbar.title=getString(R.string.title_dashboard)
-                viewpager.currentItem = 1
+                onFragmentIndexChanged(1)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                toolbar.visibility=View.VISIBLE
-                toolbar.title=getString(R.string.title_notifications)
-                viewpager.currentItem = 2
+                onFragmentIndexChanged(2)
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_settings ->{
-                toolbar.visibility=View.VISIBLE
-                toolbar.title=getString(R.string.title_activity_settings)
-                viewpager.currentItem = 3
+                onFragmentIndexChanged(3)
                 return@OnNavigationItemSelectedListener true
             }
         }
         false
     }
+
+
+    private fun onFragmentIndexChanged(index:Int){
+
+        when(index){
+            0 -> showToolBar(UNSHORN,0)
+            1 -> showToolBar(SHOW,1,getString(R.string.title_dashboard),false)
+            2 -> showToolBar(SHOW,2,getString(R.string.title_notifications),false)
+            3 ->  showToolBar(SHOW,3,getString(R.string.title_settings),true)
+
+        }
+    }
+
+
+    /**
+     * 工具栏控制
+     */
+    private fun showToolBar(@Visibility visibility:Long= UNSHORN, position: Int=0, title:String=getString(R.string.app_name), isShowBack:Boolean=false){
+        viewpager.currentItem = position
+        if (visibility== SHOW){
+            toolbar.visibility=View.VISIBLE
+            toolbar.title=title
+            supportActionBar!!.setDisplayHomeAsUpEnabled(isShowBack)
+        }else{
+            toolbar.visibility=View.GONE
+        }
+    }
+
+
+
+
+
+
+
+
 
     private val mOnPageChangeListener = object :ViewPager.OnPageChangeListener{
         override fun onPageScrollStateChanged(state: Int) {
@@ -75,6 +121,7 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
             }
             menuItem = navigation.menu.getItem(position)
             menuItem!!.isChecked = true
+            onFragmentIndexChanged(position)
 
         }
 
@@ -109,7 +156,7 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
         adapter.addFragment(MainFragment.newInstance("0","main_fragment"))
         adapter.addFragment(DashboardFragment.newInstance("1","dashboard_fragment"))
         adapter.addFragment(NotificationFragment.newInstance("2","notification_fragment"))
-//        adapter.addFragment(SettingsFragment.newInstance("3","person_fragment"))
+        adapter.addFragment(SettingsFragment.newInstance("3","person_fragment"))
         viewPager.adapter=adapter
 
 

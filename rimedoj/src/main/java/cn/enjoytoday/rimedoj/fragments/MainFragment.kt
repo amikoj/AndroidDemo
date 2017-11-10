@@ -18,6 +18,8 @@ import cn.enjoytoday.rimedoj.R
 import devlight.io.library.ntb.NavigationTabBar
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.item_list.view.*
+import kotlinx.android.synthetic.main.item_vp_list.*
+import kotlinx.android.synthetic.main.item_vp_list.view.*
 import java.util.ArrayList
 
 /**
@@ -99,7 +101,7 @@ class MainFragment : Fragment() {
             override fun instantiateItem(container: ViewGroup?, position: Int): Any {
                 val view = LayoutInflater.from(context).inflate(R.layout.item_vp_list, null, false)
 
-                val recyclerView = view.findViewById(R.id.rv) as RecyclerView
+                val recyclerView = view.recyclerView
                 recyclerView.setHasFixedSize(true)
                 recyclerView.layoutManager = LinearLayoutManager(
                         context, LinearLayoutManager.VERTICAL, false

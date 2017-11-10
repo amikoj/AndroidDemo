@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.e(TAG,"this is test.");
 
-
         fromFileTextView= (TextView) findViewById(R.id.parse_file_textview);
         parseStringTextView= (TextView) findViewById(R.id.parse_string_textview);
         fileProviderTextView= (TextView) findViewById(R.id.file_provider_uri_textview);

@@ -2,12 +2,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/normal_background_color"
     tools:context="cn.enjoytoday.rimedoj.fragments.DashboardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/dashboard_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/collection_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/recycle_view_padding"
+                android:paddingBottom="@dimen/recycle_view_padding"
+                android:clipToPadding="false"
+                android:visibility="gone"
+                android:clipChildren="false"
+                tools:listitem="@layout/item_collection_list"/>
+        <TextView
+            android:id="@+id/no_collections"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/collection_item_height"
+            android:background="@drawable/bg_round_rect"
+            android:gravity="center"
+            android:text="@string/collection_item_demo_title"
+            android:textColor="@color/collection_item_title_text_color"
+            android:textSize="@dimen/collection_item_title_text_size"
+            android:textStyle="italic"/>
+    </LinearLayout>
+
+
 
 </FrameLayout>

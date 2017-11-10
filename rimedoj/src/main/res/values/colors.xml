@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <!--配色方案 -->
+    <color name="normal_item_color">#ffffffff</color>   //单个条目背景色
+    <color name="normal_background_color">#bbbbbb</color> //主背景色
+
+    <color name="collection_item_title_text_color">#222222</color>
+
 </resources>

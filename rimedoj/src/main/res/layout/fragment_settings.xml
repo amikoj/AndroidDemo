@@ -1,11 +1,63 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/normal_background_color"
     tools:context="cn.enjoytoday.rimedoj.fragments.SettingsFragment">
 
 
 
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/settings_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--身份信息 -->
+        <LinearLayout
+            android:id="@+id/person_info_layout"
+            android:background="@color/normal_item_color"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="120dp">
+
+
+            <ImageView
+                android:id="@+id/person_icon"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_person_black_24dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp" />
+
+        </LinearLayout>
+
+
+        <!--设置信息 -->
+
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:background="@color/normal_item_color"
+            android:orientation="vertical"
+            android:id="@+id/settings_item_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
 
 
 

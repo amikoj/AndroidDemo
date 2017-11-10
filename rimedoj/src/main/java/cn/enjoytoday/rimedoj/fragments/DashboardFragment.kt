@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import cn.enjoytoday.rimedoj.R
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 /**
  * A simple [Fragment] subclass.
@@ -41,9 +42,23 @@ class DashboardFragment : Fragment() {
     }
 
 
+    /**
+     * 用于数据处理
+     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        loadCollections()
     }
+
+
+
+
+    private fun loadCollections(){
+        collection_recyclerView.visibility=View.GONE
+        no_collections.visibility=View.VISIBLE
+
+    }
+
 
 
 

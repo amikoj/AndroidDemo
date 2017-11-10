@@ -1,15 +1,18 @@
 <resources>
     <string name="app_name">Rimedoj</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Collections</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_settings">Settings</string>
 
 
 
 
+    <!--TODO: Collection page basic text -->
 
+    <string name="collection_item_demo_title">No Collections</string>
 
+    <string name="no_notification_title">No Notification</string>
 
 
 
