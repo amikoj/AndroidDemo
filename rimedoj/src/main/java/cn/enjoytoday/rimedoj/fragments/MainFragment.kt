@@ -1,6 +1,9 @@
 package cn.enjoytoday.rimedoj.fragments
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -15,6 +18,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import cn.enjoytoday.rimedoj.R
+import cn.enjoytoday.rimedoj.RimedojApplication
+import cn.enjoytoday.rimedoj.source.DataSource
+import cn.enjoytoday.rimedoj.source.DataTabSource
 import devlight.io.library.ntb.NavigationTabBar
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.item_list.view.*
@@ -57,11 +63,41 @@ class MainFragment : Fragment() {
         }
     }
 
+    /**
+     * 需要添加一个数据源更新通知的广播
+     */
+    private val updateReceiver=object :BroadcastReceiver(){
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent!!.action==DataSource.UPDATE_DATA_SOURCE){
+                //update data resource
+
+
+
+
+
+            }
+
+        }
+
+    }
+
+
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
 
     private var mListener: OnFragmentInteractionListener? = null
+
+    //tab适配器
+    private var tabAdapter:PagerAdapter?=null
+    private var models:MutableList<NavigationTabBar.Model> = mutableListOf()
+
+
+
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,11 +105,13 @@ class MainFragment : Fragment() {
             mParam1 = arguments.getString(ARG_PARAM1)
             mParam2 = arguments.getString(ARG_PARAM2)
         }
+        if (activity!=null){
+            activity.registerReceiver(updateReceiver, IntentFilter(DataSource.UPDATE_DATA_SOURCE))
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false)
 
     }
@@ -85,45 +123,17 @@ class MainFragment : Fragment() {
 
 
     private  fun initUI(){
-        vp_horizontal_ntb.adapter=object : PagerAdapter(){
-            override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
-                return view == `object`
-            }
 
-            override fun getCount(): Int {
-                return 5
-            }
-            override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
-                (container as ViewPager).removeView(`object` as View)
-            }
+        loadDataSource()
 
 
-            override fun instantiateItem(container: ViewGroup?, position: Int): Any {
-                val view = LayoutInflater.from(context).inflate(R.layout.item_vp_list, null, false)
 
-                val recyclerView = view.recyclerView
-                recyclerView.setHasFixedSize(true)
-                recyclerView.layoutManager = LinearLayoutManager(
-                        context, LinearLayoutManager.VERTICAL, false
-                )
-                recyclerView.adapter = RecycleAdapter()
-
-                container!!.addView(view)
-                return view
-            }
-        }
-
+        vp_horizontal_ntb.adapter=tabAdapter
 
         val colors = resources.getStringArray(R.array.default_preview)
 
-
 //        val navigationTabBar = findViewById(R.id.ntb_horizontal) as NavigationTabBar
-        val models = ArrayList<NavigationTabBar.Model>()
-        models.add(NavigationTabBar.Model.Builder(resources.getDrawable(R.drawable.ic_first), Color.parseColor(colors[0])).title("Heart").build())
-        models.add(NavigationTabBar.Model.Builder(resources.getDrawable(R.drawable.ic_second), Color.parseColor(colors[1])).title("Cup").build())
-        models.add(NavigationTabBar.Model.Builder(resources.getDrawable(R.drawable.ic_third), Color.parseColor(colors[2])).title("Diploma").build())
-        models.add(NavigationTabBar.Model.Builder(resources.getDrawable(R.drawable.ic_fourth), Color.parseColor(colors[3])).title("Flag").build())
-        models.add(NavigationTabBar.Model.Builder(resources.getDrawable(R.drawable.ic_fifth), Color.parseColor(colors[4])).title("Medal").build())
+
         ntb_horizontal.models = models
         ntb_horizontal.setViewPager(vp_horizontal_ntb, 2)
 
@@ -149,10 +159,38 @@ class MainFragment : Fragment() {
     }
 
 
-//    override fun onResume() {
-//        super.onResume()
-//
-//    }
+    /**
+     * 加载数据
+     */
+    private fun loadDataSource(){
+        tabAdapter=TabAdapter(context)      //tab adapter
+        for (dataTabSource in RimedojApplication.dataTabSources){
+            models.add(NavigationTabBar.Model.Builder(dataTabSource.icon!!,dataTabSource.tabSelectedColor!!)
+                    .title(dataTabSource.title)
+                    .build())
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    override fun onDestroy() {
+        /**
+         * 解除绑定
+         */
+        if (activity!=null){
+            activity.unregisterReceiver(updateReceiver)
+        }
+        super.onDestroy()
+    }
 
 
 
@@ -179,31 +217,65 @@ class MainFragment : Fragment() {
 
 
     /**
-     * RecycleView about test.
+     * item_adapter type
      */
+    class  RecycleAdapter(private val tabSource: DataTabSource,private val context: Context):RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    class  RecycleAdapter:RecyclerView.Adapter<RecycleAdapter.ViewHolder>(){
 
         override fun getItemCount(): Int {
-
-            return 20
+            return tabSource.collectionsDataList.size
         }
 
-        override fun onBindViewHolder(holder:ViewHolder?, position: Int) {
-            holder!!.txt.text = String.format("Navigation Item #%d", position);
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+            //bind view data.
+            tabSource.viewType!!.bindData(position,holder!!)
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_list, parent, false)
-            return ViewHolder(view!!)
-        }
-
-        inner class ViewHolder(view:View) : RecyclerView.ViewHolder(view) {
-            var txt: TextView =view.txt_vp_item_list
-
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+            /**
+             * return layout
+             *
+             */
+            return tabSource.viewType!!.inflateLayout(context,parent!!)
         }
 
     }
+
+
+    /**
+     * tab适配器
+     */
+    class TabAdapter(val context: Context):PagerAdapter(){
+        override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
+            return view == `object`
+        }
+
+        override fun getCount(): Int {
+            return RimedojApplication.dataTabSources.size
+        }
+        override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+            (container as ViewPager).removeView(`object` as View)
+        }
+
+
+        override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+            /**
+             * 添加布局,属于list布局,不做改变,需要添加加载和加载失败处理操作
+             */
+            val view = LayoutInflater.from(context).inflate(R.layout.item_vp_list, null, false)
+            val recyclerView = view.recyclerView
+            recyclerView.setHasFixedSize(true)
+            recyclerView.layoutManager = LinearLayoutManager(
+                    context, LinearLayoutManager.VERTICAL, false
+            )
+            val tabSource=RimedojApplication.dataTabSources[position]
+            recyclerView.adapter = RecycleAdapter(tabSource,context)
+            container!!.addView(view)
+            return view
+        }
+    }
+
+
 
 
 }// Required empty public constructor

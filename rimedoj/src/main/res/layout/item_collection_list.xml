@@ -9,7 +9,7 @@
 
 
    <RelativeLayout
-       android:background="@drawable/bg_round_rect"
+       android:background="@color/normal_item_color"
        android:id="@+id/item_collection_layout"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
@@ -34,10 +34,6 @@
            android:text="@string/collection_item_demo_title"
            android:textSize="@dimen/collection_item_title_text_size"
            android:textColor="@color/collection_item_title_text_color" />
-
-
-
-
    </RelativeLayout>
 
 

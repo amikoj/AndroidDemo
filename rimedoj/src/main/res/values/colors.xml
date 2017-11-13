@@ -11,4 +11,30 @@
 
     <color name="collection_item_title_text_color">#222222</color>
 
+
+
+
+    <!--settings -->
+    <color name="settings_item_title_text_color">#000000</color>
+
+
+    <color name="item_line_1_title_text_color">#444444</color>
+    <color name="item_line_1_description_text_color">#aaaaaa</color>
+
+    <color name="item_line_1_operation_text_color">#4F51B9</color>
+
+
+    <color name="item_line_2_title_text_color">#000000</color>
+    <color name="item_line_2_operation_text_color">#4F51B9</color>
+
+    <color name="item_card_1_title_text_color">#000000</color>
+    <color name="item_card_1_operation_text_color">#9a9a9a9a</color>
+
+
+
+    <color name="item_card_2_title_text_color">#444444</color>
+    <color name="item_card_2_description_text_color">#ababab</color>
+    <color name="item_card_2_operation_text_color">#4F51B9</color>
+
+
 </resources>

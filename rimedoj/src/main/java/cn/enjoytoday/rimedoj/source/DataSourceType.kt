@@ -30,6 +30,11 @@ class DataSourceType {
         const val MAP="map"      //map类型展示
 
 
+        //请求方法
+        const val GET="GET" //GET请求
+        const val POST="POST"   //POST请求
+
+
         /**
          * 数据源获取的格式
          */
@@ -45,6 +50,14 @@ class DataSourceType {
         @Retention(AnnotationRetention.SOURCE)
         annotation class  arrangement
 
+
+
+
+
+        @StringDef(GET, POST)
+        @Retention(AnnotationRetention.SOURCE)
+        annotation class method
+
     }
 
 
@@ -57,6 +70,9 @@ class DataSourceType {
      * 数据排列方式
      */
     @arrangement var dataArrangement = MAP
+
+
+    @method var dataMethod = GET
 
 
     /**

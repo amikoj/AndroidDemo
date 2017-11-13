@@ -50,6 +50,134 @@
 
 
 
+
+            <!--布局模板设置 -->
+            <RelativeLayout
+                android:id="@+id/layout_model_settings"
+                android:paddingStart="@dimen/settings_item_padding_start"
+                android:paddingEnd="@dimen/settings_item_padding_start"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_item_height">
+
+                <TextView
+                    android:id="@+id/layout_model_settings_title"
+                    android:text="@string/layout_model_settings_title"
+                    android:gravity="center_vertical|start"
+                    android:textColor="@color/settings_item_title_text_color"
+                    android:textSize="@dimen/settings_item_title_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/normal_background_color"/>
+
+            <RelativeLayout
+                android:id="@+id/resources_model_settings"
+                android:paddingStart="@dimen/settings_item_padding_start"
+                android:paddingEnd="@dimen/settings_item_padding_start"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_item_height">
+
+                <TextView
+                    android:id="@+id/resources_model_settings_title"
+                    android:text="@string/data_source_settings_title"
+                    android:gravity="center_vertical|start"
+                    android:textColor="@color/settings_item_title_text_color"
+                    android:textSize="@dimen/settings_item_title_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/normal_background_color"/>
+
+            <RelativeLayout
+                android:id="@+id/open_source_settings"
+                android:paddingStart="@dimen/settings_item_padding_start"
+                android:paddingEnd="@dimen/settings_item_padding_start"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_item_height">
+
+                <TextView
+                    android:id="@+id/open_source_settings_title"
+                    android:text="@string/open_source_title"
+                    android:gravity="center_vertical|start"
+                    android:textColor="@color/settings_item_title_text_color"
+                    android:textSize="@dimen/settings_item_title_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/normal_background_color"/>
+
+            <RelativeLayout
+                android:id="@+id/about_settings"
+                android:paddingStart="@dimen/settings_item_padding_start"
+                android:paddingEnd="@dimen/settings_item_padding_start"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_item_height">
+
+                <TextView
+                    android:id="@+id/about_settings_title"
+                    android:text="@string/about_title"
+                    android:gravity="center_vertical|start"
+                    android:textColor="@color/settings_item_title_text_color"
+                    android:textSize="@dimen/settings_item_title_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+
+            </RelativeLayout>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/normal_background_color"/>
+
+            <RelativeLayout
+                android:id="@+id/help_settings"
+                android:paddingStart="@dimen/settings_item_padding_start"
+                android:paddingEnd="@dimen/settings_item_padding_start"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/settings_item_height">
+
+                <TextView
+                    android:id="@+id/help_title"
+                    android:text="@string/help_title"
+                    android:gravity="center_vertical|start"
+                    android:textColor="@color/settings_item_title_text_color"
+                    android:textSize="@dimen/settings_item_title_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+
+            </RelativeLayout>
+
+
+
+
         </LinearLayout>
 
 

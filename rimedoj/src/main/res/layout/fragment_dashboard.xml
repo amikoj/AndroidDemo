@@ -32,7 +32,7 @@
             android:id="@+id/no_collections"
             android:layout_width="match_parent"
             android:layout_height="@dimen/collection_item_height"
-            android:background="@drawable/bg_round_rect"
+            android:background="@color/normal_item_color"
             android:gravity="center"
             android:text="@string/collection_item_demo_title"
             android:textColor="@color/collection_item_title_text_color"

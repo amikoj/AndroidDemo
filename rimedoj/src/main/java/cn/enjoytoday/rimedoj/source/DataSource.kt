@@ -9,6 +9,24 @@ import android.graphics.Color
  * 首页的整体风格设置
  */
 class DataSource {
+
+
+
+    companion object {
+        var DATA_LOADED=false
+        const val UPDATE_DATA_SOURCE="cn.enjoytoday.rimedoj.update_tab_sources" //数据源更新通知广播
+
+
+
+
+    }
+
+
+
+
+
+
+
     /**
      * 默认tab背景色设置
      */
@@ -30,21 +48,22 @@ class DataSource {
     var dataItemSources:MutableList<DataTabSource> = mutableListOf()
 
 
-    /**
-     * 收藏信息
-     */
-    var collectionsDataList:MutableList<ItemTab> = mutableListOf()
 
 
     /**
      * 加载数据源
      */
     fun loadDataSource(){
-
-
-
-
-
+        if (!DATA_LOADED) {
+            loadDefaultDataSource()
+        }else{
+            /**
+             *更新数据源
+             */
+            for (dataTabSource in dataItemSources){
+                dataTabSource.refreshDatas()
+            }
+        }
     }
 
 
@@ -53,7 +72,27 @@ class DataSource {
      */
     private fun loadDefaultDataSource(){
 
+        DATA_LOADED=true
+
+        DataTabSource
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
 
 
 

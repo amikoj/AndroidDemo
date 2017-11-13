@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/item_line_2_padding"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_line_2_height">
+
+    <ImageView
+        android:layout_alignParentEnd="true"
+        android:id="@+id/item_line_image"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_third"
+        android:layout_width="@dimen/item_line_2_height"
+        android:layout_height="match_parent" />
+
+
+    <LinearLayout
+        android:layout_toStartOf="@id/item_line_image"
+        android:orientation="vertical"
+        android:id="@+id/item_line_2_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:textColor="@color/item_line_2_title_text_color"
+            android:textSize="@dimen/item_line_2_title_text_size"
+            android:text="@string/item_line_1_title_string"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:id="@+id/item_line_2_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/item_line_2_operation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <TextView
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/item_line_2_share"
+                android:textSize="@dimen/item_line_2_operation_text_size"
+                android:text="@string/item_share_text"
+                android:textColor="@color/item_line_2_operation_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:layout_toEndOf="@id/item_line_2_share"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/item_line_1_operation_margin"
+                android:id="@+id/item_line_2_do_not_show"
+                android:textSize="@dimen/item_line_2_operation_text_size"
+                android:text="@string/item_do_not_show"
+                android:textColor="@color/item_line_2_operation_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

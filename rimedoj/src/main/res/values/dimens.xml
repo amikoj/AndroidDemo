@@ -21,10 +21,49 @@
     <dimen name="collection_item_title_text_size">20sp</dimen>
 
 
+    <!--Settings -->
+    <dimen name="settings_item_height">80dp</dimen>
+    <dimen name="settings_item_padding_start">20dp</dimen>
+    <dimen name="settings_item_title_text_size">22sp</dimen>
+
+
+    <!-- item_layout-->
+    <dimen name="item_line_1_item_height">90dp</dimen>
+    <dimen name="item_line_1_content_height">65dp</dimen>
+    <dimen name="item_line_1_item_title_text_size">19sp</dimen>
+    <dimen name="item_line_1_item_description_text_size">16sp</dimen>
+    <dimen name="item_line_1_text_padding">10dp</dimen>
+    <dimen name="item_line_1_padding_top_and_bottom">5dp</dimen>
+    <dimen name="item_line_1_operation_text_size">10sp</dimen>
+    <dimen name="item_line_1_operation_margin">20dp</dimen>
+
+
+    <dimen name="item_line_2_height">95dp</dimen>
+    <dimen name="item_line_2_padding">10dp</dimen>
+    <dimen name="item_line_2_title_text_size">20sp</dimen>
+    <dimen name="item_line_2_operation_text_size">10sp</dimen>
+    <dimen name="item_line_2_operation_margin">20dp</dimen>
+
+
+    <dimen name="item_card_1_height">135dp</dimen>
+    <dimen name="item_card_1_padding">10dp</dimen>
+    <dimen name="item_card_1_content_height">120dp</dimen>
+    <dimen name="item_card_1_title_text_size">20sp</dimen>
+    <dimen name="item_card_1_operation_text_size">10sp</dimen>
+    <dimen name="item_card_1_operation_margin">20dp</dimen>
 
 
 
 
+
+
+    <dimen name="item_card_2_height">135dp</dimen>
+    <dimen name="item_card_2_padding">7dp</dimen>
+    <dimen name="item_card_2_content_height">110dp</dimen>
+    <dimen name="item_card_2_title_text_size">18sp</dimen>
+    <dimen name="item_card_2_description_text_size">16sp</dimen>
+    <dimen name="item_card_2_operation_text_size">10sp</dimen>
+    <dimen name="item_card_2_operation_margin">20dp</dimen>
 
 
 

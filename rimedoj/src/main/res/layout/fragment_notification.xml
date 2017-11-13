@@ -25,16 +25,15 @@
             android:visibility="gone"
             android:clipChildren="false"
             tools:listitem="@layout/item_collection_list"/>
+
         <TextView
+            android:background="@color/normal_item_color"
             android:layout_marginTop="@dimen/recycle_item_start_end_padding"
-            android:paddingStart="@dimen/recycle_item_start_end_padding"
-            android:paddingEnd="@dimen/recycle_item_start_end_padding"
             android:id="@+id/no_notification"
             android:layout_width="match_parent"
             android:layout_height="@dimen/collection_item_height"
-            android:background="@drawable/bg_round_rect"
             android:gravity="center"
-            android:text="@string/collection_item_demo_title"
+            android:text="@string/no_notification_title"
             android:textColor="@color/collection_item_title_text_color"
             android:textSize="@dimen/collection_item_title_text_size"
             android:textStyle="italic"/>
