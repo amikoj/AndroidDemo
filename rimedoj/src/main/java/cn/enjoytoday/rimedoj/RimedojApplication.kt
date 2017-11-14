@@ -11,25 +11,26 @@ import cn.enjoytoday.rimedoj.source.DataTabSource
  */
 class RimedojApplication:Application() {
 
-
-    companion object {
-        var dataSource: DataSource=DataSource()    //数据源
-        var dataTabSources:MutableList<DataTabSource> = mutableListOf()
-
-
-        init {
-            dataSource.loadDataSource()  //加载基本配置资源
-            dataTabSources= dataSource.dataItemSources
-        }
-
-
-
-
-
-    }
+    var dataSource: DataSource?=null   //数据源
+    var dataTabSources:MutableList<DataTabSource> = mutableListOf()
 
 
     override fun onCreate() {
         super.onCreate()
+        initData()
+
     }
+
+
+
+
+    private fun initData(){
+        dataSource= DataSource(this.applicationContext)
+        dataSource!!.loadDataSource()  //加载基本配置资源
+        dataTabSources= dataSource!!.dataItemSources
+    }
+
+
+
+
 }

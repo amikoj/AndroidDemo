@@ -23,7 +23,7 @@ class ItemTab {
     /**
      * 所属父Tab
      */
-    var parent:DataTabSource?=null
+//    var parent:DataTabSource?=null
 
 
     /**
@@ -57,7 +57,7 @@ class ItemTab {
      *注意:需要与数据源类型对应
      *
      */
-    var paramsMap : MutableMap<Int,String> = mutableMapOf()
+    var paramsMap : MutableMap<String,String> = mutableMapOf()
 
 
     /**
@@ -71,10 +71,10 @@ class ItemTab {
     /**
      * 基本共有构造函数
      */
-    constructor(position:Int,infoUrl:String?,parent:DataTabSource){
+    constructor(position:Int,infoUrl:String?=null/**,parent:DataTabSource**/){
         this.position=position
         this.infoUrl=infoUrl
-        this.parent=parent
+//        this.parent=parent
     }
 
 

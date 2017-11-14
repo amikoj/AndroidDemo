@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="@dimen/item_line_2_padding"
     android:layout_width="match_parent"
+    android:background="@color/normal_item_color"
     android:layout_height="@dimen/item_line_2_height">
 
     <ImageView

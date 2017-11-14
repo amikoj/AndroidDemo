@@ -12,10 +12,10 @@ import devlight.io.library.ntb.NavigationTabBar
  * @serial 1.0.0
  * 展示的item的布局样式
  */
-abstract class DataViewType(var tabSource: DataTabSource){
+abstract class DataViewType{
 
 
-
+    var tabSource: DataTabSource?=null
     /**
      * 等待实现的导入
      */

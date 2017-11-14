@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="@dimen/item_card_2_padding"
+    android:background="@color/normal_item_color"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_card_2_height">
 

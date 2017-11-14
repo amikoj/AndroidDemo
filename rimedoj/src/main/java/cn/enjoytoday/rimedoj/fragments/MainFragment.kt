@@ -1,5 +1,6 @@
 package cn.enjoytoday.rimedoj.fragments
 
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -7,6 +8,7 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
@@ -118,7 +120,9 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         initUI()
+
     }
 
 
@@ -163,8 +167,10 @@ class MainFragment : Fragment() {
      * 加载数据
      */
     private fun loadDataSource(){
-        tabAdapter=TabAdapter(context)      //tab adapter
-        for (dataTabSource in RimedojApplication.dataTabSources){
+        tabAdapter=TabAdapter(activity)      //tab adapter
+        val tabSources=(activity.application as RimedojApplication).dataTabSources
+        models.clear()
+        for (dataTabSource in tabSources){
             models.add(NavigationTabBar.Model.Builder(dataTabSource.icon!!,dataTabSource.tabSelectedColor!!)
                     .title(dataTabSource.title)
                     .build())
@@ -223,12 +229,12 @@ class MainFragment : Fragment() {
 
 
         override fun getItemCount(): Int {
-            return tabSource.collectionsDataList.size
+            return tabSource.childItemList.size
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
             //bind view data.
-            tabSource.viewType!!.bindData(position,holder!!)
+//            tabSource.viewType!!.bindData(position,holder!!)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
@@ -245,13 +251,14 @@ class MainFragment : Fragment() {
     /**
      * tab适配器
      */
-    class TabAdapter(val context: Context):PagerAdapter(){
+    class TabAdapter(val context: Activity):PagerAdapter(){
+        val tabSources=(context.application as RimedojApplication).dataTabSources
         override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
             return view == `object`
         }
 
         override fun getCount(): Int {
-            return RimedojApplication.dataTabSources.size
+            return tabSources.size
         }
         override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
             (container as ViewPager).removeView(`object` as View)
@@ -268,7 +275,7 @@ class MainFragment : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(
                     context, LinearLayoutManager.VERTICAL, false
             )
-            val tabSource=RimedojApplication.dataTabSources[position]
+            val tabSource=tabSources[position]
             recyclerView.adapter = RecycleAdapter(tabSource,context)
             container!!.addView(view)
             return view

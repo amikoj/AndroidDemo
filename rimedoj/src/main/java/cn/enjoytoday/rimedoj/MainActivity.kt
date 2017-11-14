@@ -2,6 +2,7 @@ package cn.enjoytoday.rimedoj
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.IntDef
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -135,6 +136,7 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -144,6 +146,9 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
 
 
         toolbar.visibility=View.GONE
+
+
+
 
     }
 

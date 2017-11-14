@@ -1,6 +1,15 @@
 package cn.enjoytoday.rimedoj.source
 
+import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import cn.enjoytoday.rimedoj.R
+import cn.enjoytoday.rimedoj.callbacks.DataHandlerCallback
+import cn.enjoytoday.rimedoj.log
+import org.json.JSONObject
 
 /**
  * @date 17-11-10.
@@ -8,7 +17,7 @@ import android.graphics.Color
  * @serial 1.0.0
  * 首页的整体风格设置
  */
-class DataSource {
+class DataSource(var context:Context) {
 
 
 
@@ -74,7 +83,26 @@ class DataSource {
 
         DATA_LOADED=true
 
-        DataTabSource
+
+        if (dataItemSources.size>0){
+            dataItemSources.clear()
+        }
+
+        val name= arrayListOf<String>("知乎","csdn","stackOverflow","gitHub")
+        var urls = arrayListOf<String>("http://news-at.zhihu.com/api/4/news/latest",
+                "http://news-at.zhihu.com/api/4/news/latest",
+                "http://news-at.zhihu.com/api/4/news/latest",
+                "http://news-at.zhihu.com/api/4/news/latest")
+
+        val drawables= arrayListOf<Drawable>(context.resources.getDrawable(R.drawable.ic_first),
+                context.resources.getDrawable(R.drawable.ic_second),
+                context.resources.getDrawable(R.drawable.ic_third),
+                context.resources.getDrawable(R.drawable.ic_fourth))
+
+        val colors= arrayListOf<Int>(context.resources.getColor(R.color.normal_background_color),
+                context.resources.getColor(R.color.normal_background_color),
+                context.resources.getColor(R.color.normal_background_color),
+                context.resources.getColor(R.color.normal_background_color))
 
 
 
@@ -82,6 +110,120 @@ class DataSource {
 
 
 
+
+
+
+
+        (0..3)
+                .map {
+                    DataTabSource.getDataTabSource(name[it],urls[it],drawables[it],DataTabSource.TYPE_LINE_1,colors[it],object :DataHandlerCallback{
+                        override fun parseText(text: String): MutableList<ItemTab> {
+                            log("parse text,and text:$text")
+                            val items= mutableListOf<ItemTab>()
+                            try {
+                                val json = JSONObject(text)
+                                val jsonArray=json.getJSONArray("stories")
+                                for (i in 0 until jsonArray.length()){
+
+                                    val item=ItemTab(i)
+                                    val itemJson=jsonArray.getJSONObject(i)
+                                    item.paramsMap.put("item_line_1_description",itemJson.getString("title"))
+                                    item.paramsMap.put("item_line_1_title",itemJson.getString("ga_prefix"))
+                                    items.add(item)
+                                }
+
+
+                            }catch (e:Exception){
+                                e.printStackTrace()
+                                log("parse failed")
+                            }
+
+                            return items
+                        }
+
+                    })
+                }
+                .forEach { dataItemSources.add(it) }
+
+
+
+//
+//        val zhihu=DataTabSource("知乎",object :DataViewType(){
+//            override fun inflate(context: Context): View {
+//                return LayoutInflater.from(context).inflate(R.layout.item_line_1,null)
+//            }
+//
+//            override fun onItemClickListener(view: View, position: Int) {
+//                log(msg = "onItemClick,and position:$position")
+//            }
+//
+//            override fun onItemLongClickListener(view: View, position: Int): Boolean {
+//                log(msg = "onItemLongClickListener,and position:$position")
+//                return false
+//            }
+//
+//            override fun assignView(position: Int, holder: DataViewHolder) {
+//
+//                /**
+//                 * 绑定数据
+//                 */
+//
+//            }
+//
+//        },"http://news-at.zhihu.com/api/4/news/latest",context.resources.getDrawable(R.drawable.ic_first),context.resources.getColor(R.color.material_grey_800))
+//
+//        val zhihu2=DataTabSource("知乎",object :DataViewType(){
+//            override fun inflate(context: Context): View {
+//                return LayoutInflater.from(context).inflate(R.layout.item_line_1,null)
+//            }
+//
+//            override fun onItemClickListener(view: View, position: Int) {
+//                log(msg = "onItemClick,and position:$position")
+//            }
+//
+//            override fun onItemLongClickListener(view: View, position: Int): Boolean {
+//                log(msg = "onItemLongClickListener,and position:$position")
+//                return false
+//            }
+//
+//            override fun assignView(position: Int, holder: DataViewHolder) {
+//
+//                /**
+//                 * 绑定数据
+//                 */
+//
+//            }
+//
+//        },"http://news-at.zhihu.com/api/4/news/latest",context.resources.getDrawable(R.drawable.ic_first),context.resources.getColor(R.color.material_grey_800))
+//
+//        val zhihu3=DataTabSource("知乎",object :DataViewType(){
+//            override fun inflate(context: Context): View {
+//                return LayoutInflater.from(context).inflate(R.layout.item_line_1,null)
+//            }
+//
+//            override fun onItemClickListener(view: View, position: Int) {
+//                log(msg = "onItemClick,and position:$position")
+//            }
+//
+//            override fun onItemLongClickListener(view: View, position: Int): Boolean {
+//                log(msg = "onItemLongClickListener,and position:$position")
+//                return false
+//            }
+//
+//            override fun assignView(position: Int, holder: DataViewHolder) {
+//
+//                /**
+//                 * 绑定数据
+//                 */
+//
+//            }
+//
+//        },"http://news-at.zhihu.com/api/4/news/latest",context.resources.getDrawable(R.drawable.ic_first),context.resources.getColor(R.color.material_grey_800))
+//
+//
+//        dataItemSources.add(zhihu)
+//        dataItemSources.add(zhihu2)
+//        dataItemSources.add(zhihu3)
 
 
 
