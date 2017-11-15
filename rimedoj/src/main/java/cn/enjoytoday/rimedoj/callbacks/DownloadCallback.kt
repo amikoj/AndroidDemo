@@ -1,5 +1,6 @@
 package cn.enjoytoday.rimedoj.callbacks
 
+import android.graphics.drawable.Drawable
 import java.io.File
 
 /**
@@ -11,8 +12,7 @@ import java.io.File
 interface DownloadCallback:Callback {
 
 
-    fun onSuccess(saveFile: ByteArray)  //成功返回保存的文件路径
-
+    fun onSuccess(saveFile: Drawable)  //成功返回保存的文件路径
 
     fun onFailed(errorMsg:String) //失败,返回失败原因
 

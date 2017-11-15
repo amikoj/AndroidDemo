@@ -22,7 +22,7 @@
                 android:paddingTop="@dimen/recycle_view_padding"
                 android:paddingBottom="@dimen/recycle_view_padding"
                 android:clipToPadding="false"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:clipChildren="false"
                 tools:listitem="@layout/item_collection_list"/>
         <TextView

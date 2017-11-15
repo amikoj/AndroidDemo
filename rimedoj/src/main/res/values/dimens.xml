@@ -45,7 +45,7 @@
     <dimen name="item_line_2_operation_margin">20dp</dimen>
 
 
-    <dimen name="item_card_1_height">135dp</dimen>
+    <dimen name="item_card_1_height">165dp</dimen>
     <dimen name="item_card_1_padding">10dp</dimen>
     <dimen name="item_card_1_content_height">120dp</dimen>
     <dimen name="item_card_1_title_text_size">18sp</dimen>
@@ -57,7 +57,7 @@
 
 
 
-    <dimen name="item_card_2_height">135dp</dimen>
+    <dimen name="item_card_2_height">165dp</dimen>
     <dimen name="item_card_2_padding">7dp</dimen>
     <dimen name="item_card_2_content_height">110dp</dimen>
     <dimen name="item_card_2_title_text_size">18sp</dimen>

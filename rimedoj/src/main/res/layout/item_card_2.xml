@@ -1,88 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="@dimen/item_card_2_padding"
-    android:background="@color/normal_item_color"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="@dimen/item_card_2_height"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_card_2_height">
+    android:paddingBottom="@dimen/item_card_2_padding">
 
-
-
-
-    <RelativeLayout
-        android:id="@+id/item_card_2_content"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_card_2_content_height">
-
-
-        <TextView
-            android:layout_alignParentTop="true"
-            android:id="@+id/item_card_2_description"
-            android:maxLines="3"
-            android:ellipsize="end"
-            android:text="@string/item_line_1_description_string"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_alignParentBottom="true"
-            android:lines="1"
-            android:ellipsize="end"
-            android:id="@+id/item_card_2_title"
-            android:textSize="@dimen/item_card_2_title_text_size"
-            android:textColor="@color/item_card_2_title_text_color"
-            android:text="@string/item_line_1_title_string"
-            android:layout_width="match_parent"
-            android:gravity="start|center_vertical"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:layout_below="@id/item_card_2_description"
-            android:layout_above="@id/item_card_2_title"
-            android:id="@+id/item_card_2_image"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_third"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-
-
-    </RelativeLayout>
-
-
-
-
-    <RelativeLayout
-        android:id="@+id/item_card_2_operation"
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="@dimen/item_card_2_padding"
+        android:background="@color/normal_item_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <TextView
-            android:layout_alignParentEnd="true"
-            android:id="@+id/item_card_2_share"
-            android:textSize="@dimen/item_card_2_operation_text_size"
-            android:text="@string/item_share_text"
-            android:textColor="@color/item_card_2_operation_text_color"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:id="@+id/item_card_2_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_card_2_content_height">
 
 
-        <TextView
-            android:layout_toStartOf="@id/item_card_2_share"
-            android:layout_marginEnd="@dimen/item_card_2_operation_margin"
-            android:id="@+id/item_card_2_do_not_show"
-            android:textSize="@dimen/item_card_2_operation_text_size"
-            android:text="@string/item_do_not_show"
-            android:textColor="@color/item_card_2_operation_text_color"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            <TextView
+                android:layout_alignParentTop="true"
+                android:id="@+id/item_card_2_description"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:text="@string/item_line_1_description_string"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:lines="1"
+                android:ellipsize="end"
+                android:id="@+id/item_card_2_title"
+                android:textSize="@dimen/item_card_2_title_text_size"
+                android:textColor="@color/item_card_2_title_text_color"
+                android:text="@string/item_line_1_title_string"
+                android:layout_width="match_parent"
+                android:gravity="start|center_vertical"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_below="@id/item_card_2_description"
+                android:layout_above="@id/item_card_2_title"
+                android:id="@+id/item_card_2_image"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_third"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
 
-    </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/item_card_2_operation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:gravity="center"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/item_card_2_share"
+                android:textSize="@dimen/item_card_2_operation_text_size"
+                android:text="@string/item_share_text"
+                android:textColor="@color/item_card_2_operation_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+
+            <TextView
+                android:gravity="center"
+                android:layout_toStartOf="@id/item_card_2_share"
+                android:layout_marginEnd="@dimen/item_card_2_operation_margin"
+                android:id="@+id/item_card_2_do_not_show"
+                android:textSize="@dimen/item_card_2_operation_text_size"
+                android:text="@string/item_do_not_show"
+                android:textColor="@color/item_card_2_operation_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+
+        </RelativeLayout>
 
 
 
@@ -98,4 +103,7 @@
 
 
 
-</LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

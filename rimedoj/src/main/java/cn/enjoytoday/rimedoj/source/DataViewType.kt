@@ -1,5 +1,6 @@
 package cn.enjoytoday.rimedoj.source
 
+import android.app.Activity
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -33,13 +34,13 @@ abstract class DataViewType{
     /**
      * 赋值
      */
-    abstract fun assignView(position: Int,holder:DataViewHolder)
+    abstract fun assignView(position: Int,holder:DataViewHolder,actvity: Activity?)
 
 
     //绑定数据数据接口
-    fun bindData(position: Int,holder:RecyclerView.ViewHolder){
+    fun bindData(position: Int,holder:RecyclerView.ViewHolder,actvity: Activity?){
         if (holder is DataViewHolder){
-            assignView(position,holder)
+            assignView(position,holder,actvity)
         }else{
             TODO("ViewHolder Type is incorrect,please check your viewHolder at first.")
         }

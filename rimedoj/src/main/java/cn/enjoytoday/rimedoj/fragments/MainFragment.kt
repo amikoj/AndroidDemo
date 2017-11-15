@@ -176,7 +176,7 @@ class MainFragment : Fragment() {
                 val view = LayoutInflater.from(context).inflate(R.layout.item_vp_list, null)
                 view.recyclerView.setHasFixedSize(true)
                 view.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                view.recyclerView.adapter = RecycleAdapter(tabSources!![x], context)
+                view.recyclerView.adapter = RecycleAdapter(tabSources!![x], context,activity)
                 viewlist.add(view)
             }
         }
@@ -237,7 +237,7 @@ class MainFragment : Fragment() {
     /**
      * item_adapter type
      */
-    class  RecycleAdapter(private val tabSource: DataTabSource,private val context: Context):RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+    class  RecycleAdapter(private val tabSource: DataTabSource,private val context: Context,val activity: Activity?):RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
 
         override fun getItemCount(): Int {
@@ -245,9 +245,9 @@ class MainFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-            log(msg = "onBindViewHolder,and childItemList size:${tabSource.childItemList.size}")
+//            log(msg = "onBindViewHolder,and childItemList size:${tabSource.childItemList.size}")
             //bind view data.
-            tabSource.viewType!!.bindData(position,holder!!)
+            tabSource.viewType!!.bindData(position,holder!!,activity)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
@@ -283,8 +283,7 @@ class MainFragment : Fragment() {
         override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
             log("destoryItem:and position:$position")
 //            container!!.removeViewAt(position)
-//
-            container!!.removeView(viewList[position])
+            container!!.removeView(`object` as View)
 //            (container as ViewPager).removeView(`object` as View)
         }
 

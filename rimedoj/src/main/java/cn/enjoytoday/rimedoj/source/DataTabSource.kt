@@ -1,5 +1,6 @@
 package cn.enjoytoday.rimedoj.source
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
@@ -16,6 +17,7 @@ import cn.enjoytoday.rimedoj.callbacks.DownloadCallback
 import cn.enjoytoday.rimedoj.callbacks.RequestCallback
 import cn.enjoytoday.rimedoj.log
 import cn.enjoytoday.rimedoj.net.NetRequest
+import kotlinx.android.synthetic.main.item_card_1.view.*
 import kotlinx.android.synthetic.main.item_line_1.view.*
 import kotlinx.android.synthetic.main.item_line_2.view.*
 import okhttp3.*
@@ -78,43 +80,42 @@ class DataTabSource(){
                              return false
                          }
 
-                         override fun assignView(position: Int, holder: DataViewHolder) {
-                             println( "assignView,position:$position")
-                             /**
-                              * 绑定数据
-                              */
-                             val itemTab=dataTabSource.childItemList[position]
-                             println("itemTab :${itemTab.toString()}")
-                             /**
-                              * 绑定数据
-                              */
-                             holder.itemView.item_line_1_title.text=itemTab.paramsMap["item_line_1_title"]
-                             holder.itemView.item_line_1_description.text=itemTab.paramsMap["item_line_1_description"]
+                         override fun assignView(position: Int, holder: DataViewHolder,activity: Activity?) {
+                             if (activity !=null) {
+//                                 println("assignView,position:$position")
+                                 val itemTab = dataTabSource.childItemList[position]
+                                 activity.runOnUiThread{
 
-                             NetRequest().download(itemTab.paramsMap["item_line_1_icon"]!!,dataTabSource.title,object :DownloadCallback{
-                                 override fun onSuccess(bytes: ByteArray) {
-                                     log("download image success.")
-//                                     val imageFile=File(saveFile)
-//                                     val bytes=imageFile.readBytes()
-                                     val drawable=BitmapDrawable(BitmapFactory.decodeByteArray(bytes,0,bytes.size))
-                                     holder.itemView.item_line_1_icon.setImageDrawable(drawable)
-
+                                     holder.itemView.item_line_1_title.text = itemTab.paramsMap["item_line_1_title"]
+                                     holder.itemView.item_line_1_description.text = itemTab.paramsMap["item_line_1_description"]
                                  }
 
-                                 override fun onFailed(errorMsg: String) {
-                                     log("load image success.")
-                                 }
 
-                                 override fun onProcess(process: Long) {
+                                 NetRequest().download(itemTab.paramsMap["item_line_1_icon"]!!, dataTabSource.title, object : DownloadCallback {
+                                     override fun onSuccess(drawable: Drawable) {
+//                                         log("download image success.")
+                                         activity.runOnUiThread{
+                                             holder.itemView.item_line_1_icon.setImageDrawable(drawable)
+                                         }
 
-                                 }
 
-                                 override fun onStart() {
+                                     }
 
-                                 }
+                                     override fun onFailed(errorMsg: String) {
+                                         log("load image success.")
+                                     }
 
-                             })
+                                     override fun onProcess(process: Long) {
 
+                                     }
+
+                                     override fun onStart() {
+
+                                     }
+
+                                 })
+
+                             }
                          }
                      }
 
@@ -124,7 +125,6 @@ class DataTabSource(){
                 }
 
                 TYPE_LINE_2 ->{
-
                     object :DataViewType() {
                         override fun inflate(context: Context): View {
                             return LayoutInflater.from(context).inflate(R.layout.item_line_2, null)
@@ -139,15 +139,39 @@ class DataTabSource(){
                             return false
                         }
 
-                        override fun assignView(position: Int, holder: DataViewHolder) {
+                        override fun assignView(position: Int, holder: DataViewHolder, activity: Activity?) {
+                            if (activity !=null) {
+                                val itemTab = dataTabSource.childItemList[position]
+                                activity.runOnUiThread{
+                                    holder.itemView.item_line_2_title.text = itemTab.paramsMap["item_line_2_title"]
+                                }
 
-                            val itemTab=dataTabSource.childItemList[position]
-                            val params=itemTab.paramsMap
 
-                            /**
-                             * 绑定数据
-                             */
-                            holder.itemView.item_line_2_title.text=params["item_line_1_title"]
+                                NetRequest().download(itemTab.paramsMap["item_line_2_image"]!!, dataTabSource.title, object : DownloadCallback {
+                                    override fun onSuccess(drawable: Drawable) {
+//                                         log("download image success.")
+                                        activity.runOnUiThread{
+                                            holder.itemView.item_line_2_image.setImageDrawable(drawable)
+                                        }
+
+
+                                    }
+
+                                    override fun onFailed(errorMsg: String) {
+                                        log("load image success.")
+                                    }
+
+                                    override fun onProcess(process: Long) {
+
+                                    }
+
+                                    override fun onStart() {
+
+                                    }
+
+                                })
+
+                            }
 
 
                         }
@@ -175,12 +199,40 @@ class DataTabSource(){
                             return false
                         }
 
-                        override fun assignView(position: Int, holder: DataViewHolder) {
+                        override fun assignView(position: Int, holder: DataViewHolder, activity: Activity?) {
 
-                            /**
-                             * 绑定数据
-                             */
+                            if (activity !=null) {
+                                val itemTab = dataTabSource.childItemList[position]
+                                activity.runOnUiThread{
+                                    holder.itemView.item_card_1_title.text = itemTab.paramsMap["item_card_1_title"]
+                                }
 
+
+                                NetRequest().download(itemTab.paramsMap["item_card_1_image"]!!, dataTabSource.title, object : DownloadCallback {
+                                    override fun onSuccess(drawable: Drawable) {
+//                                         log("download image success.")
+                                        activity.runOnUiThread{
+                                            holder.itemView.item_card_1_image.setImageDrawable(drawable)
+                                        }
+
+
+                                    }
+
+                                    override fun onFailed(errorMsg: String) {
+                                        log("load image success.")
+                                    }
+
+                                    override fun onProcess(process: Long) {
+
+                                    }
+
+                                    override fun onStart() {
+
+                                    }
+
+                                })
+
+                            }
                         }
                     }
 
@@ -206,11 +258,39 @@ class DataTabSource(){
                             return false
                         }
 
-                        override fun assignView(position: Int, holder: DataViewHolder) {
+                        override fun assignView(position: Int, holder: DataViewHolder, activity: Activity?) {
 
-                            /**
-                             * 绑定数据
-                             */
+                            if (activity !=null) {
+                                val itemTab = dataTabSource.childItemList[position]
+                                activity.runOnUiThread{
+                                    holder.itemView.item_card_1_title.text = itemTab.paramsMap["item_card_1_title"]
+                                }
+
+
+                                NetRequest().download(itemTab.paramsMap["item_card_1_image"]!!, dataTabSource.title, object : DownloadCallback {
+                                    override fun onSuccess(drawable: Drawable) {
+                                        activity.runOnUiThread{
+                                            holder.itemView.item_card_1_image.setImageDrawable(drawable)
+                                        }
+
+
+                                    }
+
+                                    override fun onFailed(errorMsg: String) {
+                                        log("load image success.")
+                                    }
+
+                                    override fun onProcess(process: Long) {
+
+                                    }
+
+                                    override fun onStart() {
+
+                                    }
+
+                                })
+
+                            }
 
                         }
                     }

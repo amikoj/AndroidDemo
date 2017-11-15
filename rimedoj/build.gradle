@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "cn.enjoytoday.rimedoj"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
 

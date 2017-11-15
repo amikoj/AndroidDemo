@@ -56,6 +56,7 @@
                 android:id="@+id/layout_model_settings"
                 android:paddingStart="@dimen/settings_item_padding_start"
                 android:paddingEnd="@dimen/settings_item_padding_start"
+                android:onClick="onSettingClick"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/settings_item_height">
 
@@ -79,6 +80,7 @@
 
             <RelativeLayout
                 android:id="@+id/resources_model_settings"
+                android:onClick="onSettingClick"
                 android:paddingStart="@dimen/settings_item_padding_start"
                 android:paddingEnd="@dimen/settings_item_padding_start"
                 android:layout_width="match_parent"
@@ -104,6 +106,7 @@
 
             <RelativeLayout
                 android:id="@+id/open_source_settings"
+                android:onClick="onSettingClick"
                 android:paddingStart="@dimen/settings_item_padding_start"
                 android:paddingEnd="@dimen/settings_item_padding_start"
                 android:layout_width="match_parent"
@@ -130,6 +133,7 @@
 
             <RelativeLayout
                 android:id="@+id/about_settings"
+                android:onClick="onSettingClick"
                 android:paddingStart="@dimen/settings_item_padding_start"
                 android:paddingEnd="@dimen/settings_item_padding_start"
                 android:layout_width="match_parent"
@@ -157,6 +161,7 @@
 
             <RelativeLayout
                 android:id="@+id/help_settings"
+                android:onClick="onSettingClick"
                 android:paddingStart="@dimen/settings_item_padding_start"
                 android:paddingEnd="@dimen/settings_item_padding_start"
                 android:layout_width="match_parent"

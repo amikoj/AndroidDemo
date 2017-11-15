@@ -110,7 +110,7 @@ class DataSource(var context:Context) {
 
         (0..3)
                 .map {
-                    DataTabSource.getDataTabSource(name[it],urls[it],drawables[it],DataTabSource.TYPE_LINE_1,colors[it],object :DataHandlerCallback{
+                    DataTabSource.getDataTabSource(name[it],urls[it],drawables[it],DataTabSource.TYPE_LINE_2,colors[it],object :DataHandlerCallback{
                         override fun parseText(text: String): MutableList<ItemTab> {
                             log("parse text,and text:$text")
                             val items= mutableListOf<ItemTab>()
@@ -121,10 +121,10 @@ class DataSource(var context:Context) {
 
                                     val item=ItemTab(i)
                                     val itemJson=jsonArray.getJSONObject(i)
-                                    item.paramsMap.put("item_line_1_description",itemJson.getString("title"))
-                                    item.paramsMap.put("item_line_1_title",itemJson.getString("ga_prefix"))
+                                    item.paramsMap.put("item_line_2_title",itemJson.getString("title"))
+//                                    item.paramsMap.put("item_line_2_title",itemJson.getString("ga_prefix"))
                                     val imageUrls=itemJson.getJSONArray("images")
-                                    item.paramsMap.put("item_line_1_icon",imageUrls.getString(0))
+                                    item.paramsMap.put("item_line_2_image",imageUrls.getString(0))
                                     items.add(item)
                                 }
 
@@ -140,87 +140,6 @@ class DataSource(var context:Context) {
                     })
                 }
                 .forEach { dataItemSources.add(it) }
-
-
-
-//
-//        val zhihu=DataTabSource("知乎",object :DataViewType(){
-//            override fun inflate(context: Context): View {
-//                return LayoutInflater.from(context).inflate(R.layout.item_line_1,null)
-//            }
-//
-//            override fun onItemClickListener(view: View, position: Int) {
-//                log(msg = "onItemClick,and position:$position")
-//            }
-//
-//            override fun onItemLongClickListener(view: View, position: Int): Boolean {
-//                log(msg = "onItemLongClickListener,and position:$position")
-//                return false
-//            }
-//
-//            override fun assignView(position: Int, holder: DataViewHolder) {
-//
-//                /**
-//                 * 绑定数据
-//                 */
-//
-//            }
-//
-//        },"http://news-at.zhihu.com/api/4/news/latest",context.resources.getDrawable(R.drawable.ic_first),context.resources.getColor(R.color.material_grey_800))
-//
-//        val zhihu2=DataTabSource("知乎",object :DataViewType(){
-//            override fun inflate(context: Context): View {
-//                return LayoutInflater.from(context).inflate(R.layout.item_line_1,null)
-//            }
-//
-//            override fun onItemClickListener(view: View, position: Int) {
-//                log(msg = "onItemClick,and position:$position")
-//            }
-//
-//            override fun onItemLongClickListener(view: View, position: Int): Boolean {
-//                log(msg = "onItemLongClickListener,and position:$position")
-//                return false
-//            }
-//
-//            override fun assignView(position: Int, holder: DataViewHolder) {
-//
-//                /**
-//                 * 绑定数据
-//                 */
-//
-//            }
-//
-//        },"http://news-at.zhihu.com/api/4/news/latest",context.resources.getDrawable(R.drawable.ic_first),context.resources.getColor(R.color.material_grey_800))
-//
-//        val zhihu3=DataTabSource("知乎",object :DataViewType(){
-//            override fun inflate(context: Context): View {
-//                return LayoutInflater.from(context).inflate(R.layout.item_line_1,null)
-//            }
-//
-//            override fun onItemClickListener(view: View, position: Int) {
-//                log(msg = "onItemClick,and position:$position")
-//            }
-//
-//            override fun onItemLongClickListener(view: View, position: Int): Boolean {
-//                log(msg = "onItemLongClickListener,and position:$position")
-//                return false
-//            }
-//
-//            override fun assignView(position: Int, holder: DataViewHolder) {
-//
-//                /**
-//                 * 绑定数据
-//                 */
-//
-//            }
-//
-//        },"http://news-at.zhihu.com/api/4/news/latest",context.resources.getDrawable(R.drawable.ic_first),context.resources.getColor(R.color.material_grey_800))
-//
-//
-//        dataItemSources.add(zhihu)
-//        dataItemSources.add(zhihu2)
-//        dataItemSources.add(zhihu3)
-
 
 
     }

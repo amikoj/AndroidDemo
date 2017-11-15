@@ -17,6 +17,7 @@ import cn.enjoytoday.rimedoj.helper.BottomNavigationViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import java.io.File
 
 class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
 
@@ -95,6 +96,14 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
     }
 
 
+    fun onSettingClick(view:View){
+        val settingFragment= fragmentAdaptper!!.getFragment(3)
+        if (settingFragment is SettingsFragment){
+            settingFragment.onSettingClick(view)
+        }
+    }
+
+
 
 
 
@@ -148,19 +157,24 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
 
 
 
+
+
+
     }
 
+
+    private var fragmentAdaptper:ViewPagerAdapter?=null
 
     /**
      * 加载viewpager的适配器
      */
     private fun setupViewPager(viewPager: ViewPager){
-        val adapter=ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(MainFragment.newInstance("0","main_fragment"))
-        adapter.addFragment(DashboardFragment.newInstance("1","dashboard_fragment"))
-        adapter.addFragment(NotificationFragment.newInstance("2","notification_fragment"))
-        adapter.addFragment(SettingsFragment.newInstance("3","person_fragment"))
-        viewPager.adapter=adapter
+        fragmentAdaptper=ViewPagerAdapter(supportFragmentManager)
+        fragmentAdaptper!!.addFragment(MainFragment.newInstance("0","main_fragment"))
+        fragmentAdaptper!!.addFragment(DashboardFragment.newInstance("1","dashboard_fragment"))
+        fragmentAdaptper!!.addFragment(NotificationFragment.newInstance("2","notification_fragment"))
+        fragmentAdaptper!!.addFragment(SettingsFragment.newInstance("3","person_fragment"))
+        viewPager.adapter=fragmentAdaptper
 
 
     }
@@ -191,6 +205,11 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
                 mFragmentList.add(fragment)
             }
 
+        }
+
+
+        fun getFragment(position: Int):Fragment{
+            return  mFragmentList[position]
         }
 
 

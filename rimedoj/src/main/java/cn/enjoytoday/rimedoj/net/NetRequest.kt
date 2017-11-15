@@ -1,5 +1,8 @@
 package cn.enjoytoday.rimedoj.net
 
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.os.Environment
 import android.support.annotation.NonNull
 import cn.enjoytoday.rimedoj.callbacks.Callback
 import cn.enjoytoday.rimedoj.callbacks.DownloadCallback
@@ -29,7 +32,7 @@ class NetRequest {
         /**
          * 本地缓存路径
          */
-        private val  cacheDir:File=File("/mnt/sdcard/cn.enjoytoday.rimedoj")
+        private val  cacheDir:File=File(Environment.getExternalStorageDirectory().absolutePath,"cn.enjoytoday.rimedoj")
         private var openCached=true
         init {
             try {
@@ -124,55 +127,35 @@ class NetRequest {
      */
     @Synchronized fun download(url: String,saveDir:String,callback:DownloadCallback?=null){
 
-//        val request=Request.Builder().url(url).build()
-//
-//        val call=httpClient!!.newCall(request)
+        val request=Request.Builder().cacheControl(CacheControl.Builder().maxAge(1000*60*60*24,TimeUnit.MILLISECONDS).build())
+                .url(url)
+                .build()
+
+        val call=httpClient!!.newCall(request)
+
+        val destDir = File(cacheDir, saveDir)
+        if (!destDir.exists()) {
+            destDir.mkdir()
+        }
+        val destFile = File(destDir, getNameFromUrl(url))
 
         Thread {
             try {
+                val response=  call.execute()
+                if (response!=null) {
 
-                val destDir = File(cacheDir, saveDir)
-                val exists=destDir.exists()
-                log("exists:$exists")
-               val isSuccess= destDir.mkdirs()
-                log("mkdir is success:$isSuccess")
-//                if (!destDir.exists()) {
-//                    destDir.mkdirs()
-//                }
-
-                val destFile = File(destDir, getNameFromUrl(url))
-                val requestUrl = URL(url)
-                val bytes=requestUrl.readBytes()
-//                destFile.writeBytes(bytes)
-
-                callback?.onSuccess(bytes)
-
-//            val response=  call.execute()
-//
-//            if (response!=null) {
-//
-//                if (response.isSuccessful) {
-//                    val inputStream = response.body()!!.byteStream()
-//                    val destDir = File(cacheDir, saveDir)
-//                    if (!destDir.exists()) {
-//                        destDir.mkdir()
-//                    }
-//                    val destFile = File(destDir, getNameFromUrl(url))
-//
-//                    val outPutStream = FileOutputStream(destFile)
-//                    var buf = ByteArray(2048)
-//                    var len = 0
-//                    var sum: Long =
-//
-//
-//                }else{
-//                    callback?.onFailed(response.message())
-//                }
-
-
-//            }else{
-//                callback?.onFailed("access network failed.")
-//            }
+                    if (response.isSuccessful) {
+                        val inputStream = response.body()!!.byteStream()
+                        val bytes=  inputStream.readBytes()
+                        destFile.writeBytes(bytes)
+                        val drawable= BitmapDrawable(BitmapFactory.decodeByteArray(bytes,0,bytes.size))
+                        callback?.onSuccess(drawable)
+                    }else{
+                        callback?.onFailed(response.message())
+                    }
+                }else{
+                    callback?.onFailed("access network failed.")
+                }
 
 
             } catch (e: Exception) {
@@ -210,13 +193,13 @@ class NetRequest {
             try {
                 val response=call.execute()
                 if (response!=null && response.isSuccessful){
-                    log("request according to GET, and request success.")
+//                    log("request according to GET, and request success.")
                     callback.onSuccess(response.body()!!.string())
                 }
 
             }catch (e:Exception){
                 e.printStackTrace()
-                log("request get method,and request failed,no response return.")
+//                log("request get method,and request failed,no response return.")
             }
 
         }.start()
