@@ -108,12 +108,6 @@ class DataSource(var context:Context) {
 
 
 
-
-
-
-
-
-
         (0..3)
                 .map {
                     DataTabSource.getDataTabSource(name[it],urls[it],drawables[it],DataTabSource.TYPE_LINE_1,colors[it],object :DataHandlerCallback{
@@ -129,6 +123,8 @@ class DataSource(var context:Context) {
                                     val itemJson=jsonArray.getJSONObject(i)
                                     item.paramsMap.put("item_line_1_description",itemJson.getString("title"))
                                     item.paramsMap.put("item_line_1_title",itemJson.getString("ga_prefix"))
+                                    val imageUrls=itemJson.getJSONArray("images")
+                                    item.paramsMap.put("item_line_1_icon",imageUrls.getString(0))
                                     items.add(item)
                                 }
 

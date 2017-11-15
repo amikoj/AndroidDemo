@@ -143,8 +143,6 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
         BottomNavigationViewHelper.disableShiftMode(navigation)
         viewpager.addOnPageChangeListener(mOnPageChangeListener)
         setupViewPager(viewpager)
-
-
         toolbar.visibility=View.GONE
 
 
@@ -169,7 +167,7 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
 
 
     /**
-     * viewpagerAdapter
+     * viewpagerAdapter,fragment适配器
      */
     inner  class ViewPagerAdapter(fragmentManager: FragmentManager):FragmentPagerAdapter(fragmentManager){
 

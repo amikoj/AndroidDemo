@@ -1,6 +1,8 @@
 package cn.enjoytoday.rimedoj.source
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.support.annotation.IntDef
@@ -10,12 +12,14 @@ import android.view.View
 import cn.enjoytoday.rimedoj.R
 import cn.enjoytoday.rimedoj.RimedojApplication
 import cn.enjoytoday.rimedoj.callbacks.DataHandlerCallback
+import cn.enjoytoday.rimedoj.callbacks.DownloadCallback
 import cn.enjoytoday.rimedoj.callbacks.RequestCallback
 import cn.enjoytoday.rimedoj.log
 import cn.enjoytoday.rimedoj.net.NetRequest
 import kotlinx.android.synthetic.main.item_line_1.view.*
 import kotlinx.android.synthetic.main.item_line_2.view.*
 import okhttp3.*
+import java.io.File
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -79,15 +83,37 @@ class DataTabSource(){
                              /**
                               * 绑定数据
                               */
-//                             val itemTab=dataTabSource.childItemList[position]
-//
-//                             println("itemTab :${itemTab.toString()}")
-//
-//                             /**
-//                              * 绑定数据
-//                              */
-//                             holder.itemView.item_line_1_title.text=itemTab.paramsMap["item_line_1_title"]
-//                             holder.itemView.item_line_1_description.text=itemTab.paramsMap["item_line_1_description"]
+                             val itemTab=dataTabSource.childItemList[position]
+                             println("itemTab :${itemTab.toString()}")
+                             /**
+                              * 绑定数据
+                              */
+                             holder.itemView.item_line_1_title.text=itemTab.paramsMap["item_line_1_title"]
+                             holder.itemView.item_line_1_description.text=itemTab.paramsMap["item_line_1_description"]
+
+                             NetRequest().download(itemTab.paramsMap["item_line_1_icon"]!!,dataTabSource.title,object :DownloadCallback{
+                                 override fun onSuccess(bytes: ByteArray) {
+                                     log("download image success.")
+//                                     val imageFile=File(saveFile)
+//                                     val bytes=imageFile.readBytes()
+                                     val drawable=BitmapDrawable(BitmapFactory.decodeByteArray(bytes,0,bytes.size))
+                                     holder.itemView.item_line_1_icon.setImageDrawable(drawable)
+
+                                 }
+
+                                 override fun onFailed(errorMsg: String) {
+                                     log("load image success.")
+                                 }
+
+                                 override fun onProcess(process: Long) {
+
+                                 }
+
+                                 override fun onStart() {
+
+                                 }
+
+                             })
 
                          }
                      }

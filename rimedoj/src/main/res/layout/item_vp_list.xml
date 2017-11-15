@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
+        android:focusableInTouchMode="true"
         android:clipToPadding="false"
         android:animateLayoutChanges="false"
         android:clipChildren="false" />

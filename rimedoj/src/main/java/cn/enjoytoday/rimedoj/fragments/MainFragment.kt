@@ -21,8 +21,10 @@ import android.widget.TextView
 
 import cn.enjoytoday.rimedoj.R
 import cn.enjoytoday.rimedoj.RimedojApplication
+import cn.enjoytoday.rimedoj.log
 import cn.enjoytoday.rimedoj.source.DataSource
 import cn.enjoytoday.rimedoj.source.DataTabSource
+import cn.enjoytoday.rimedoj.source.DataViewType
 import devlight.io.library.ntb.NavigationTabBar
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.item_list.view.*
@@ -96,6 +98,8 @@ class MainFragment : Fragment() {
 
 
 
+    private var tabSources:MutableList<DataTabSource> ? =null
+
 
 
 
@@ -120,26 +124,19 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         initUI()
 
     }
 
 
     private  fun initUI(){
-
         loadDataSource()
-
-
-
         vp_horizontal_ntb.adapter=tabAdapter
-
-        val colors = resources.getStringArray(R.array.default_preview)
-
+//        val colors = resources.getStringArray(R.array.default_preview)
 //        val navigationTabBar = findViewById(R.id.ntb_horizontal) as NavigationTabBar
 
         ntb_horizontal.models = models
-        ntb_horizontal.setViewPager(vp_horizontal_ntb, 2)
+        ntb_horizontal.setViewPager(vp_horizontal_ntb, 0)
 
         ntb_horizontal.post {
             (vp_horizontal_ntb.layoutParams as ViewGroup.MarginLayoutParams).topMargin = (-ntb_horizontal.badgeMargin).toInt()
@@ -158,19 +155,34 @@ class MainFragment : Fragment() {
 
 
 
-
-
     }
 
+
+    val viewlist= mutableListOf<View>()
 
     /**
      * 加载数据
      */
     private fun loadDataSource(){
-        tabAdapter=TabAdapter(activity)      //tab adapter
-        val tabSources=(activity.application as RimedojApplication).dataTabSources
+        if (tabSources==null){
+            tabSources=(activity.application as RimedojApplication).dataTabSources
+        }
         models.clear()
-        for (dataTabSource in tabSources){
+
+
+
+        if (viewlist.size==0) {
+            for (x in 0 until tabSources!!.size) {
+                val view = LayoutInflater.from(context).inflate(R.layout.item_vp_list, null)
+                view.recyclerView.setHasFixedSize(true)
+                view.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                view.recyclerView.adapter = RecycleAdapter(tabSources!![x], context)
+                viewlist.add(view)
+            }
+        }
+
+        tabAdapter=TabAdapter(activity,viewlist)      //tab adapter
+        for (dataTabSource in tabSources!!){
             models.add(NavigationTabBar.Model.Builder(dataTabSource.icon!!,dataTabSource.tabSelectedColor!!)
                     .title(dataTabSource.title)
                     .build())
@@ -233,8 +245,9 @@ class MainFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+            log(msg = "onBindViewHolder,and childItemList size:${tabSource.childItemList.size}")
             //bind view data.
-//            tabSource.viewType!!.bindData(position,holder!!)
+            tabSource.viewType!!.bindData(position,holder!!)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
@@ -242,7 +255,14 @@ class MainFragment : Fragment() {
              * return layout
              *
              */
-            return tabSource.viewType!!.inflateLayout(context,parent!!)
+//            val view= LayoutInflater.from(context).inflate(R.layout.item_line_1, null)
+//            return DataViewType.DataViewHolder(view)
+            return tabSource.viewType!!.inflateLayout(context)
+        }
+
+        override fun onDetachedFromRecyclerView(recyclerView: RecyclerView?) {
+            log("recyceview ondetachedFormRecylerView")
+            super.onDetachedFromRecyclerView(recyclerView)
         }
 
     }
@@ -251,17 +271,21 @@ class MainFragment : Fragment() {
     /**
      * tab适配器
      */
-    class TabAdapter(val context: Activity):PagerAdapter(){
-        val tabSources=(context.application as RimedojApplication).dataTabSources
+    class TabAdapter(val context: Activity, private val viewList:MutableList<View>):PagerAdapter(){
+
         override fun isViewFromObject(view: View?, `object`: Any?): Boolean {
             return view == `object`
         }
 
         override fun getCount(): Int {
-            return tabSources.size
+            return viewList.size
         }
         override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
-            (container as ViewPager).removeView(`object` as View)
+            log("destoryItem:and position:$position")
+//            container!!.removeViewAt(position)
+//
+            container!!.removeView(viewList[position])
+//            (container as ViewPager).removeView(`object` as View)
         }
 
 
@@ -269,16 +293,15 @@ class MainFragment : Fragment() {
             /**
              * 添加布局,属于list布局,不做改变,需要添加加载和加载失败处理操作
              */
-            val view = LayoutInflater.from(context).inflate(R.layout.item_vp_list, null, false)
-            val recyclerView = view.recyclerView
-            recyclerView.setHasFixedSize(true)
-            recyclerView.layoutManager = LinearLayoutManager(
-                    context, LinearLayoutManager.VERTICAL, false
-            )
-            val tabSource=tabSources[position]
-            recyclerView.adapter = RecycleAdapter(tabSource,context)
-            container!!.addView(view)
-            return view
+            log("instantiateItem and position is $position")
+//            val view = LayoutInflater.from(context).inflate(R.layout.item_vp_list, null, false)
+//            view.recyclerView.setHasFixedSize(true)
+//            view.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+//
+//            val tabSource=tabSources[position]
+//            view.recyclerView.adapter = RecycleAdapter(tabSource,context)
+            container!!.addView(viewList[position])
+            return viewList[position]
         }
     }
 

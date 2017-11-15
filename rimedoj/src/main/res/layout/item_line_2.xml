@@ -7,7 +7,7 @@
 
     <ImageView
         android:layout_alignParentEnd="true"
-        android:id="@+id/item_line_image"
+        android:id="@+id/item_line_2_image"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_third"
         android:layout_width="@dimen/item_line_2_height"
@@ -15,7 +15,7 @@
 
 
     <LinearLayout
-        android:layout_toStartOf="@id/item_line_image"
+        android:layout_toStartOf="@id/item_line_2_image"
         android:orientation="vertical"
         android:id="@+id/item_line_2_content"
         android:layout_width="match_parent"

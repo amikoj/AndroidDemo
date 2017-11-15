@@ -1,13 +1,18 @@
 package cn.enjoytoday.rimedoj.net
 
+import android.support.annotation.NonNull
 import cn.enjoytoday.rimedoj.callbacks.Callback
+import cn.enjoytoday.rimedoj.callbacks.DownloadCallback
 import cn.enjoytoday.rimedoj.callbacks.RequestCallback
 import cn.enjoytoday.rimedoj.log
 import cn.enjoytoday.rimedoj.source.DataSourceType
 import okhttp3.*
+import okio.ByteString.read
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
+import java.net.URL
 import java.util.concurrent.TimeUnit
 
 /**
@@ -102,6 +107,84 @@ class NetRequest {
     }
 
 
+    /**
+     * @param url
+     * @return
+     *
+     */
+    @NonNull
+    private fun getNameFromUrl( url:String):String{
+        return url.substring(url.lastIndexOf("/") + 1);
+    }
+
+
+    /***
+     * @param url 下载文件资源定位符
+     * @param saveDir 资源缓存地址
+     */
+    @Synchronized fun download(url: String,saveDir:String,callback:DownloadCallback?=null){
+
+//        val request=Request.Builder().url(url).build()
+//
+//        val call=httpClient!!.newCall(request)
+
+        Thread {
+            try {
+
+                val destDir = File(cacheDir, saveDir)
+                val exists=destDir.exists()
+                log("exists:$exists")
+               val isSuccess= destDir.mkdirs()
+                log("mkdir is success:$isSuccess")
+//                if (!destDir.exists()) {
+//                    destDir.mkdirs()
+//                }
+
+                val destFile = File(destDir, getNameFromUrl(url))
+                val requestUrl = URL(url)
+                val bytes=requestUrl.readBytes()
+//                destFile.writeBytes(bytes)
+
+                callback?.onSuccess(bytes)
+
+//            val response=  call.execute()
+//
+//            if (response!=null) {
+//
+//                if (response.isSuccessful) {
+//                    val inputStream = response.body()!!.byteStream()
+//                    val destDir = File(cacheDir, saveDir)
+//                    if (!destDir.exists()) {
+//                        destDir.mkdir()
+//                    }
+//                    val destFile = File(destDir, getNameFromUrl(url))
+//
+//                    val outPutStream = FileOutputStream(destFile)
+//                    var buf = ByteArray(2048)
+//                    var len = 0
+//                    var sum: Long =
+//
+//
+//                }else{
+//                    callback?.onFailed(response.message())
+//                }
+
+
+//            }else{
+//                callback?.onFailed("access network failed.")
+//            }
+
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                log("download file failed")
+                callback?.onFailed("access network failed.")
+            }
+        }.start()
+
+    }
+
+
 
 
     /**
@@ -110,7 +193,7 @@ class NetRequest {
      * @param params 请求参数
      * @param callback 回调返回
      */
-   @Synchronized fun get(url: String, params:MutableMap<String,String> = mutableMapOf(), callback: RequestCallback){
+   @Synchronized private fun get(url: String, params:MutableMap<String,String> = mutableMapOf(), callback: RequestCallback){
         var requestUrl=url
         if (params.isNotEmpty()){
             requestUrl+="?"
@@ -149,7 +232,7 @@ class NetRequest {
      * @param callback 回调返回接口
      *
      */
-    @Synchronized fun post(url: String, params:MutableMap<String,String> = mutableMapOf(), callback: RequestCallback){
+    @Synchronized private fun post(url: String, params:MutableMap<String,String> = mutableMapOf(), callback: RequestCallback){
         val formBody = FormBody.Builder()
 
         if (params.isNotEmpty()){

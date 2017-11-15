@@ -49,9 +49,8 @@ abstract class DataViewType{
     /**
      * 导入布局
      */
-    fun inflateLayout(context: Context,parent:ViewGroup):RecyclerView.ViewHolder{
+    fun inflateLayout(context: Context):RecyclerView.ViewHolder{
         val view=inflate(context)
-        parent.addView(view)
         return DataViewHolder(view,this)
     }
 
@@ -59,18 +58,18 @@ abstract class DataViewType{
     /**
      * viewholder
      */
-    class DataViewHolder(view: View,val dataViewType: DataViewType):RecyclerView.ViewHolder(view),View.OnClickListener,View.OnLongClickListener{
+    class DataViewHolder(view: View, private val dataViewType: DataViewType?=null):RecyclerView.ViewHolder(view),View.OnClickListener,View.OnLongClickListener{
         init {
             this.itemView.setOnClickListener(this)
         }
 
 
         override fun onClick(v: View?) {
-            dataViewType.onItemClickListener(v!!,layoutPosition)
+            dataViewType?.onItemClickListener(v!!,layoutPosition)
         }
 
-        override fun onLongClick(v: View?): Boolean {
-            return dataViewType.onItemLongClickListener(v!!,layoutPosition)
+        override fun onLongClick(v: View?): Boolean{
+            return dataViewType?.onItemLongClickListener(v!!,layoutPosition)?:false
 
         }
 

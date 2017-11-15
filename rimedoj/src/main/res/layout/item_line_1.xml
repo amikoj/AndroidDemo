@@ -12,7 +12,6 @@
 
     <LinearLayout
         android:id="@+id/item_line_1_content"
-
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_line_1_content_height">
@@ -20,7 +19,7 @@
         <ImageView
             android:src="@drawable/ic_third"
             android:scaleType="fitCenter"
-            android:id="@+id/item_icon"
+            android:id="@+id/item_line_1_icon"
             android:layout_width="@dimen/item_line_1_content_height"
             android:layout_height="@dimen/item_line_1_content_height" />
 
