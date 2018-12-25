@@ -64,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
         imagesPath=new File(Environment.getExternalStorageDirectory(),"images");
         newFile=new File(imagesPath,"test.png");
 
-        if (this.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, android.os.Process.myPid(), Process.myUid())!= PackageManager.PERMISSION_GRANTED){
+        if (this.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.os.Process.myPid(),
+                Process.myUid())!= PackageManager.PERMISSION_GRANTED){
             requestPermission();
         }
         if (!imagesPath.exists()){
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             parseStringTextView.setText(uri.toString());
             Log.e(TAG,"uri parse string:"+uri.toString());
 
-            uri=TestFileProvider.getUriForFile(this,"com.hfcai.fileprovider",newFile);
+            uri=FileProvider.getUriForFile(this,"com.hfcai.fileprovider",newFile);
             fileProviderTextView.setText(uri.toString());
             Log.e(TAG,"fileprovider uri string:"+uri.toString());
 
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.open_with_fileprovider:
                 intent=new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(TestFileProvider.getUriForFile(this,"com.hfcai.fileprovider",newFile),"image/*");
+                intent.setDataAndType(FileProvider.getUriForFile(this,"com.hfcai.fileprovider",newFile),"image/*");
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 startActivity(intent);
                 break;
@@ -167,11 +169,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.take_photo_new:
                 String cachePath1 = getApplicationContext().getExternalCacheDir().getPath()+File.separator+"images";
                 File picFile1 = new File(cachePath1, "test.jpg");
-                Uri picUri1 = TestFileProvider.getUriForFile(this,"com.hfcai.fileprovider",picFile1);
+                Uri picUri1 = FileProvider.getUriForFile(this,"com.hfcai.fileprovider",picFile1);
                 Log.e(TAG,"picUri:"+picUri1);
                 intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, picUri1);
                 startActivityForResult(intent, 100);
+                break;
+            default:
                 break;
         }
 
@@ -190,7 +194,8 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG,"onActivityResult");
         if (requestCode==PHOTO_REQUEST_CODE){
             if (data!=null){
-                Uri uri=data.getData(); //获取相册的原图片
+                Uri uri=data.getData();
+                //获取相册的原图片
                 Intent intent=new Intent("com.android.camera.action.CROP");
                 intent.setDataAndType(uri,"image/*");
                 intent.putExtra("crop",true);
@@ -198,8 +203,10 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("aspectY", 1);
                 intent.putExtra("outputX", 250);
                 intent.putExtra("outputY", 250);
-                intent.putExtra("outputFormat", "PNG");// 图片格式
-                intent.putExtra("noFaceDetection", true);// 取消人脸识别
+                // 图片格式
+                intent.putExtra("outputFormat", "PNG");
+                // 取消人脸识别
+                intent.putExtra("noFaceDetection", true);
                 intent.putExtra("return-data", true);
                 startActivityForResult(intent, PHOTO_REQUEST_CUT);
             }
@@ -210,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
                 if (newFile.exists()){
                     newFile.delete();
                 }
+
 
                 if (bitmap==null){
                     return;
@@ -238,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         refresh();
-
 
     }
 

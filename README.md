@@ -1,15 +1,14 @@
-# AndroidDemo
-Android demo project recorder in life.
+# 介绍
+Android 开发Demo记录
 
 
-## Project
-Project list,that's it:
-
+## 项目列表
 
 - [FileProviderDemo](https://github.com/fishly/AndroidDemo/tree/master/FileProviderDemo)
 
-   android 7.0 feature,use FileProvider replace Uri for security.
+  android 7.0新特性,app内uri离开当前app需要使用FileProvider生成uri地址.
 
 - [ActionBarDemo](https://github.com/fishly/AndroidDemo/tree/master/ActionBarDemo)
-  
-  introduce actionbar setting.
+
+  记录和归纳actionbar的使用.
+
