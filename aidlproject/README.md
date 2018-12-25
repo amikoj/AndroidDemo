@@ -178,7 +178,7 @@ package com.kubo.aidlproject;
 parcelable TestData;
 ```
 
-创建完aidl后,android sdk工具可将其自动转化为对应的继承I**Interface**的接口，其实也就是生成一个binder的过程，如上aidl对应的接口如下:
+创建完aidl后,android sdk工具可将其自动转化为对应的继承**IInterface**的接口，其实也就是生成一个binder的过程，如上aidl对应的接口如下:
 
 ```
 //
