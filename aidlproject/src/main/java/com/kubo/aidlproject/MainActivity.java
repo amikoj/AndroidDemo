@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 //发送测试数据
 
                 if (iTestInterface!=null){
-
                     try {
                         iTestInterface.sendTest(testData);
                         Log.e("in","testData:"+testData.toString());
@@ -120,5 +119,12 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        unbindService(serviceConnection);
+        super.onDestroy();
     }
 }
